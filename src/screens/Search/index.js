@@ -19,7 +19,7 @@ const Search = () => {
                     <Text style={styles.sectionTitle}>Tag Populer</Text>
                     <Icon name="chevron-right" size={18} color="#4D96DE" style={{position: 'absolute', right: 0}}/>
                 </View>
-                <View>
+                <View style={{ flexDirection: 'column' }} >
                     <Tag warna="#65D661" teks="Webinar"/>
                     <Tag warna="#8455C2" teks="KonserOnline"/>
                     <Tag warna="#FFB97D" teks="Design"/>

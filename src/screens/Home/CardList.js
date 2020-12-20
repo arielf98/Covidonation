@@ -4,6 +4,7 @@ import { Card, Paragraph, Title, Avatar } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
+//ambil data dari database 
 const DATA = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -29,8 +30,6 @@ const DATA = [
 
 const CardItem = ({title, price, author}) => (
     <View style={styles.item}>
-
-
         <Card style={styles.cardItem}>
             <View style={styles.detailContainer}>
                 <Title style={styles.title}>{title}</Title>
@@ -42,7 +41,6 @@ const CardItem = ({title, price, author}) => (
                 <Paragraph>
                     <Icon name="account" size={18} /> <Text> {author} </Text> 
                 </Paragraph>
-
             </View>
             
             <Card.Cover style={styles.cardItemImage} 

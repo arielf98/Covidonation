@@ -1,11 +1,11 @@
 import React, { useEffect , useState } from 'react'
-import { HomeScreen} from './src/Home/Home'
+import { HomeScreen} from './src/screens/Home/Home'
 import SearchScreen from './src/screens/Search'
 import { BackHandler, ToastAndroid } from "react-native"
 import { BottomNavigation, Text } from 'react-native-paper';
 
 
-// const SearchRoute = () => <Text>Search</Text>;
+
 const NotificationRoute = () => <Text>Notification</Text>;
 const ProfileRoute = () => <Text>Profile</Text>;
 
@@ -34,7 +34,7 @@ export default function App() {
     );
 
     return () => backHandler.remove();
-  }, [isBackbuttonClickedTwice, setIsBackbuttonClickedTwice])
+  }, [isBackbuttonClickedTwice])
 
 
 

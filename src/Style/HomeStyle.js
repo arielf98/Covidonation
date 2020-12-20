@@ -15,8 +15,8 @@ const fontSizeText = 16
 
 
 //make style home page here....
-export const style =  StyleSheet.create({
-    container: {
+export const styles =  StyleSheet.create({
+    containerSafeArea: {
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
         justifyContent: 'center',
@@ -66,15 +66,15 @@ export const style =  StyleSheet.create({
         marginTop: 20,
     },
 
-    surface: {
-        padding: 8,
-        height: 80,
-        width: 80,
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 4,
-        margin: 5,
-    },
+    // surface: {
+    //     padding: 8,
+    //     height: 80,
+    //     width: 80,
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     elevation: 4,
+    //     margin: 5,
+    // },
 
     cardListContainer: {
         marginTop:10,
@@ -87,6 +87,57 @@ export const style =  StyleSheet.create({
         height: 40,
         width: 40
     },
+
+    imageLogo: {
+
+        height: 200,
+        width: 200,
+    },
+
+    container: {
+        flex: 1,
+        marginTop: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    item: {
+        padding: 5,
+        marginVertical: 2,
+    },
+    header: {
+        fontSize: 32,
+        backgroundColor: "#fff"
+    },
+    // title: {
+    //     fontSize: 24
+    // },
+
+    // title: {
+    //     fontSize: 32,
+    // },
+    cardItem: {
+        borderRadius: 9,
+    },
+    cardItemImage: {
+        width: '25%',
+        height: 100,
+        borderRadius: 9,
+        marginTop: 40,
+        marginBottom: 10,
+        marginLeft: 10,
+    },
+
+    detailContainer: {
+        marginStart: 125,
+        marginTop: 20,
+        marginBottom: -130,
+    },
+    titleCardItem: {
+        marginLeft: 5
+    },
+    // paragraph: {
+    //     overflow: 'hidden',
+    //  },
 
 
 })
