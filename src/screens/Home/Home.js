@@ -1,8 +1,6 @@
 
 import React from 'react'
-import { Alert, SectionList, View, StyleSheet, Text, Image } from 'react-native'
-import { Avatar, Card, Paragraph, Title } from 'react-native-paper'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { SectionList} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from '../../Style/HomeStyle'
 import  HeaderLists  from './HeaderLists'
@@ -10,40 +8,38 @@ import ListItems from './ListItems'
 
 
 
-const DATA = [
+
+const DATA = [ 
     {
         data: [
              {  
-                title : "judul 1",
+                title : "Mencuci adalah jalan ninjaku",
                 author: "Ariel Febrian",
                 price: 15000,
             },
              {  
-                title : "judul 2",
+                title : "cara bikin kue bolu",
                 author: "Inggi ci Imutt ",
                 price: 12000,
             },
              {  
-                title : "judul 3",
+                title : "belajar laravel pemula",
                 author: "Bagus Si tambunan",
                 price: 13000,
             },
              {  
-                title : "judul 4",
+                title : "memasak adalah jalan ninjaku",
                 author: "okky Si nadiya",
                 price: 14000,
             },
         ]
-    },
-
+    }
 ]
 
 export function HomeScreen() {
-
     return (
         <SafeAreaView style={styles.containerSafeArea}>
-
-            <SectionList
+            <SectionList 
                 sections={DATA}
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <ListItems 

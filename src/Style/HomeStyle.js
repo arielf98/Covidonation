@@ -29,7 +29,9 @@ export const styles =  StyleSheet.create({
         height: 50,
         width: '95%',
         marginTop: 20,
+        marginBottom: 10,
         padding: 10,
+        
     },
 
     containerTextStyle: {
@@ -64,17 +66,8 @@ export const styles =  StyleSheet.create({
 
     carouselContainer: {
         marginTop: 20,
+        
     },
-
-    // surface: {
-    //     padding: 8,
-    //     height: 80,
-    //     width: 80,
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     elevation: 4,
-    //     margin: 5,
-    // },
 
     cardListContainer: {
         marginTop:10,
@@ -101,21 +94,19 @@ export const styles =  StyleSheet.create({
         alignItems: 'center'
     },
     item: {
-        padding: 5,
-        marginVertical: 2,
+        flex: 1,
+        paddingHorizontal: 10,
+        marginVertical: 5,
+        
+        
     },
     header: {
         fontSize: 32,
         backgroundColor: "#fff"
     },
-    // title: {
-    //     fontSize: 24
-    // },
-
-    // title: {
-    //     fontSize: 32,
-    // },
+ 
     cardItem: {
+        flex: 1,
         borderRadius: 9,
     },
     cardItemImage: {
@@ -128,16 +119,19 @@ export const styles =  StyleSheet.create({
     },
 
     detailContainer: {
+        flex: 1,
         marginStart: 125,
         marginTop: 20,
         marginBottom: -130,
     },
     titleCardItem: {
-        marginLeft: 5
+        marginLeft: 5,
     },
-    // paragraph: {
-    //     overflow: 'hidden',
-    //  },
 
-
+    container: {
+        marginTop: '10%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 650
+    },
 })

@@ -55,12 +55,11 @@ export default function App() {
     });
 
   return (
-    <BottomNavigation 
+    <BottomNavigation
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
     />
- 
     
     )
 }

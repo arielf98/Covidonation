@@ -32,23 +32,25 @@ const DATA = [
   },
 ]
 
-
 export const SLIDER_WIDTH = Dimensions.get('window').width
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7) + 100
 
 const CarouselCardItem = ({ item, index }) => {
   return (
     <View style={styles.container} key={index}>
-      {/* <Image
-        source={{ uri: item.imgUrl }}
-        style={styles.image}
-      /> */}
-      <Text style={styles.header}>{item.title}</Text>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Image
+          style={{
+            height: 150,
+            width: 150
+          }}
+          source={require('../../img/logoCovidonation/logo_a.png')}
+        />
+      </View>
       <Text style={styles.body}>{item.body}</Text>
     </View>
   )
 }
-
 
 export default function CarouselView() {
 
@@ -56,6 +58,7 @@ export default function CarouselView() {
   const isCarousel = React.useRef(null)
 
     return (  
+      <>
       <View style={styles.carouselContainer} >
         <Carousel
           layout="tinder"
@@ -70,31 +73,35 @@ export default function CarouselView() {
           onSnapToItem={ (index) => setIndex(index)  }
         />
 
-        <Pagination containerStyle={styles.paginationConatainer}
-            dotsLength={DATA.length}
-            activeDotIndex={index}
-            carouselRef={isCarousel}
-            dotStyle={{
-                        width: 30,
-                        height: 10,
-                        borderRadius: 5,
-                        marginHorizontal: 0,
-                        backgroundColor: 'rgba(0, 0, 0, 0.92)'
-                      }}
-          inactiveDotStyle={{
-            width: 15,
-            height: 15,
-            borderRadius: 10,
-            marginHorizontal: -10,
-            backgroundColor: 'rgba(0, 0, 0, 0.92)'
+          <View style={styles.paginationConatainer}>
+          <Pagination style={styles.paginationConatainer}
+              dotsLength={DATA.length}
+              activeDotIndex={index}
+              carouselRef={isCarousel}
+              dotStyle={{
+                width: 30,
+                height: 10,
+                borderRadius: 5,
+                marginHorizontal: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.92)'
+              }}
+              inactiveDotStyle={{
+                width: 15,
+                height: 15,
+                borderRadius: 10,
+                marginHorizontal: -10,
+                backgroundColor: 'rgba(0, 0, 0, 0.92)'
 
-          }}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          tappableDots={true}
-/>
-      </View>
-      
+              }}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+              tappableDots={true}
+            />
+          </View>
+
+    </View>
+    
+      </>
        
         )
 }
@@ -133,18 +140,17 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     height: 130,
-    overflow: 'hidden'
   },
 
   carouselContainer : {
-    height: 250,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-
-  paginationConatainer: {
+    flex: 1,
     marginBottom: -40,
-    marginTop: -40
+  },
+  
+  paginationConatainer: {
+    marginBottom: 25,
+    marginTop: -100,
+     
   },
 
 })

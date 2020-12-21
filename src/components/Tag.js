@@ -1,22 +1,25 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
-const Tag = (props) => {
+const Tag = ({warna, teks, tinggi, lebar , margin}) => {
     return (
         <TouchableOpacity style={{
             alignSelf: 'flex-start',
-            borderColor: props.warna,
+            borderColor: warna,
             borderWidth: 2,
             borderRadius: 12,
             paddingVertical: 5,
             paddingHorizontal: 10,
             marginHorizontal: 10,
-            marginVertical: 5
+            marginVertical: 5,
+            height: tinggi || null,
+            width: lebar || null,
+            marginHorizontal: margin || null
         }}>
             <Text style={{
-                color: props.warna,
+                color: warna,
             }}>
-                {props.teks}
+                {teks}
             </Text>
         </TouchableOpacity>
         
