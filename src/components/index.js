@@ -1,9 +1,9 @@
-import MiniContent from './MiniContent'
-import MySearchBar from './MySearchBar'
-import Tag from './Tag'
+import ItemMiniContent from './ItemMiniContent'
+import ItemSearchBar from './ItemSearchBar'
+import ItemTag from './ItemTag'
 
 export {
-    MiniContent,
-    MySearchBar,
-    Tag
+    ItemMiniContent,
+    ItemSearchBar,
+    ItemTag,
 };

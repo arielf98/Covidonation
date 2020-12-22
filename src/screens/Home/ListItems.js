@@ -3,9 +3,9 @@ import { View, Text } from 'react-native'
 import { styles } from '../../Style/HomeStyle'
 import { Card, Paragraph, Title } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import  Tag  from '../../components/Tag'
+import { ItemTag } from '../../components'
 
-export default ListItems = ({ title, author, price }) => {
+export default ListItems = ({ title, author, price, tag }) => {
     return (
 
         // item yang akan di loop didalam Section List
@@ -35,21 +35,11 @@ export default ListItems = ({ title, author, price }) => {
                     marginHorizontal: 2,
                     marginBottom: 10
                 }}>
-                    <Tag
-                        warna="#65D661"
-                        teks="Webinar"
-                        tinggi={30} 
-                        margin={2}  />
-                    <Tag
-                        warna="#8455C2"
-                        teks="KonserOnline"
-                        tinggi={30} 
-                        margin={2}  />
-                    <Tag
-                        warna="#FFB97D"
-                        teks="Design"
-                        tinggi={30} 
-                        margin={2}  />
+                    {tag.map(prop => {
+                        return (
+                            <ItemTag key={prop.id} warna={prop.warna} teks={prop.teks}/>
+                        );
+                    })}
                  
                 </View>
                
