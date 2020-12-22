@@ -6,9 +6,7 @@ import { styles } from '../../Style/HomeStyle'
 import  HeaderLists  from './HeaderLists'
 import ListItems from './ListItems'
 
-
-
-
+// data dari database 
 const DATA = [ 
     {
         data: [

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import { styles } from '../../Style/HomeStyle'
 import { Card, Paragraph, Title } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import  Tag  from '../../components/Tag'
+import { Tag } from '../../components'
 
 export default ListItems = ({ title, author, price }) => {
     return (
