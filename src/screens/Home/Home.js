@@ -42,11 +42,12 @@ export function HomeScreen() {
             <SectionList 
                 sections={DATA}
                 keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <ListItems 
+                renderItem={({ item }) => <ListItems  // setiap item yang ada di list ada di component ListItems
                                             title ={item.title}
                                             author={item.author}
                                             price={item.price}   />}
-
+                                            
+                                            // component header list berisikan component carousel dan logo covidonation
                 renderSectionHeader={() => <HeaderLists/> }
             />
 
