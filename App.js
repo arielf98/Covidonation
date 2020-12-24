@@ -1,12 +1,13 @@
 import React, { useEffect , useState } from 'react'
 import { HomeScreen} from './src/screens/Home/Home'
-import SearchScreen from './src/screens/Search'
+import { ScreenSearch } from './src/screens/Search'
 import { BackHandler, ToastAndroid } from "react-native"
 import { BottomNavigation, Text } from 'react-native-paper';
+import Notif from './src/screens/Notifikasi/Notif';
 
 
 
-const NotificationRoute = () => <Text>Notification</Text>;
+
 const ProfileRoute = () => <Text>Profile</Text>;
 
 export default function App() {
@@ -49,15 +50,17 @@ export default function App() {
       { key: 'search', title: 'Search', icon: 'magnify', color: '#009688' },
       { key: 'notification', title: 'Notification', icon: 'bell', color: '#795548'  },
       { key: 'profile', title: 'Profile', icon: 'account', color: '#607D8B' },
+      // { key: 'login', title: 'Login', icon: 'login', color: '#607D8B' },
     ])
   
 
     // setiap halaman akan di tampilkan disini.....
     const renderScene = BottomNavigation.SceneMap({
       home: HomeScreen,
-      search: SearchScreen,
-      notification: NotificationRoute,
+      search: ScreenSearch,
+      notification: Notif,
       profile: ProfileRoute,
+      // login: '#'
     })
 
   return (
