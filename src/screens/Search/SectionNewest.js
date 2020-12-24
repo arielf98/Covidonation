@@ -7,16 +7,19 @@ const DataSectionNewest = [
         id: 1,
         judulKonten: "Too Much to Ask",
         namaKreator: "Niall Horan",
+        gambarKonten: "https://picsum.photos/700",
     },
     {  
         id: 2,
         judulKonten: "Again",
         namaKreator: "YUI",
+        gambarKonten: "https://picsum.photos/700",
     },
     {  
         id: 3,
         judulKonten: "Stuck with U",
         namaKreator: "Ariana Grande & Justin Bieber",
+        gambarKonten: "https://picsum.photos/700",
     },
 ];
 
@@ -32,8 +35,10 @@ const SectionNewest = () => {
                 return (
                     <ItemMiniContent
                     key={prop.id}
+                    id={prop.id}
                     judulKonten={prop.judulKonten}
                     namaKreator={prop.namaKreator}
+                    gambarKonten={prop.gambarKonten}
                     />
                 );
             })}

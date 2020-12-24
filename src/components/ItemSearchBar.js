@@ -1,5 +1,6 @@
 import React from 'react'
 import { Searchbar } from 'react-native-paper';
+import { styles } from '../Style/SearchStyle'
 
 const ItemSearchBar = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -8,7 +9,9 @@ const ItemSearchBar = () => {
 
     return (
         <Searchbar
-        placeholder="Search"
+        style={styles.searchBarView}
+        inputStyle={styles.searchBarText}
+        placeholder="Pencarian..."
         onChangeText={onChangeSearch}
         value={searchQuery}
         />

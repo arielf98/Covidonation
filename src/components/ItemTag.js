@@ -10,8 +10,8 @@ export default ItemTag = prop => {
             borderRadius: 12,
             paddingVertical: 5,
             paddingHorizontal: 10,
-            marginHorizontal: 10,
-            marginVertical: 5
+            marginBottom:10,
+            marginRight: 10,
         }}>
             <Text style={{
                 color: prop.warna,
