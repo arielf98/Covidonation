@@ -23,13 +23,13 @@ export const styles =  StyleSheet.create({
         alignItems: 'center'
     },
     containerCard : {
-        backgroundColor: '#3a0ca3',
-        borderColor: '#3a0ca3',
+        backgroundColor: '#3F51B5',
+        borderColor: '#3F51B5',
         borderRadius: 10,
         height: 50,
         width: '95%',
         marginTop: 20,
-        marginBottom: 10,
+        marginBottom: 40,
         padding: 10,
         
     },
@@ -132,6 +132,6 @@ export const styles =  StyleSheet.create({
         marginTop: '10%',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 650
+        height: 700,
     },
 })

@@ -6,28 +6,15 @@ import Carousel ,{ Pagination }from 'react-native-snap-carousel'
 const DATA = [
 
   {
-    title: "Aenean leo",
-    body: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
+    body: "Donasi anda sangat berarti untuk akselerasi mitigasi COVID-19 di indonesia. ",
     imgUrl: "https://picsum.photos/id/11/200/300"
   },
   {
-    title: "In turpis",
-    body: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis. at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis.at lacus ac velit ornare lobortis. ",
+    body: "Covid itu nyata bukan hoax kata seorang yang jauh disana. ",
     imgUrl: "https://picsum.photos/id/10/200/300"
   },
   {
-    title: "Lorem Ipsum",
-    body: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: "https://picsum.photos/id/12/200/300"
-  },
-  {
-    title: "Lorem Ipsum",
-    body: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: "https://picsum.photos/id/12/200/300"
-  },
-  {
-    title: "Lorem Ipsum",
-    body: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+    body: "Cintaku padamu bagaikan angin ada tapi tak nampak.",
     imgUrl: "https://picsum.photos/id/12/200/300"
   },
 ]
@@ -36,6 +23,9 @@ const DATA = [
 export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7) + 100
 
+
+
+//TODO buat lebih modular lagi...
 const CarouselCardItem = ({ item, index }) => {
   return (
     <View style={styles.container} key={index}>
@@ -75,7 +65,7 @@ export default function CarouselView() {
         />
 
           <View style={styles.paginationConatainer}>
-          <Pagination style={styles.paginationConatainer}
+          <Pagination 
               dotsLength={DATA.length}
               activeDotIndex={index}
               carouselRef={isCarousel}
@@ -107,7 +97,7 @@ export default function CarouselView() {
         )
 }
 
-
+// TODO buat lebih modular lagi....
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -141,6 +131,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     height: 130,
+    lineHeight: 25,
+    fontWeight: 'bold',
+    textAlign: 'justify'
   },
 
   carouselContainer : {
@@ -149,7 +142,7 @@ const styles = StyleSheet.create({
   },
   
   paginationConatainer: {
-    marginBottom: 25,
+    marginBottom: 45,
     marginTop: -100,
      
   },
