@@ -8,24 +8,18 @@ export const styles = StyleSheet.create({
         flexDirection: 'row'
     },
 
-    //Touchable
-    touchableView:
-    {
-        borderRadius: 15
-    },
-
     // Top Bar
     topBarView:
     {
-        backgroundColor: 'white',
+        backgroundColor: Parent.colorBlueMax,
     },
     topBarIcon:
     {
-        color: Parent.greyColorLow,
+        
     },
     topBarText:
     {
-        color: Parent.greyColorMid,
+        
     },
 
     // Section (Tag, Popular, Newest)
@@ -41,14 +35,14 @@ export const styles = StyleSheet.create({
     },
     sectionTitle:
     {
-        color: Parent.greyColorMid,
-        fontSize: Parent.titleFontSize,
+        color: Parent.colorGreyMid,
+        fontSize: Parent.sizeFontMax,
         fontWeight: 'bold',
     },
     sectionIcon:
     {
-        fontSize: Parent.defFontSize+2,
-        color: Parent.defBlue,
+        fontSize: Parent.sizeFontMin,
+        color: Parent.colorBlueMid,
         position: 'absolute',
         right: 0,
         marginRight: 5,
@@ -70,39 +64,51 @@ export const styles = StyleSheet.create({
     },
     miniContentTitle:
     {
-        fontSize: Parent.defFontSize+2,
-        color: Parent.greyColorMost,
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMax,
         fontWeight: 'bold',
         marginBottom: 5,
     },
     miniContentAuthor:
     {
-        fontSize: Parent.defFontSize-1,
-        color: Parent.greyColorLow,
+        fontSize: Parent.sizeFontMin,
+        color: Parent.colorGreyMin,
         marginLeft: 5,
+    },
+    miniContentIcon:
+    {
+        marginTop: 3,
+        color: Parent.colorGreyMin,
+        fontSize: Parent.sizeFontMin-1,
     },
 
     // Search Bar
     searchBarView:
     {
-        backgroundColor: '#EAF1F8',
+        backgroundColor: Parent.colorBlueMin,
         borderRadius: 10,
     },
     searchBarText:
     {
-        color: Parent.greyColorMid,
+        color: Parent.colorGreyMid,
     },
 
     // Card Content
+    cardWrapper:
+    {
+        borderRadius: 15,
+        backgroundColor: Parent.colorWhite,
+        padding: 10,
+        margin: 10,
+    },
     cardContentView:
     {
         flexDirection: 'row',
-        padding: 10,
     },
     cardContentImg:
     {
-        width: 90,
-        height: 90,
+        width: 85,
+        height: 85,
         borderRadius: 15,
     },
     cardContentDetailView:
@@ -111,8 +117,8 @@ export const styles = StyleSheet.create({
     },
     cardContentTitle:
     {
-        fontSize: Parent.titleFontSize,
-        color: Parent.greyColorMost,
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMax,
         fontWeight: 'bold',
         marginTop: 3,
         marginBottom: 5,
@@ -124,9 +130,21 @@ export const styles = StyleSheet.create({
     },
     cardContentText:
     {
-        fontSize: Parent.defFontSize,
-        color: Parent.greyColorLow,
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMin,
         marginLeft: 5,
+    },
+    cardContentTagView:
+    {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 15,
+    },
+    cardContentIcon:
+    {
+        marginTop: 5,
+        color: Parent.colorGreyMin,
+        fontSize: Parent.sizeFontMin-1,
     },
 
 

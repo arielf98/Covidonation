@@ -12,7 +12,7 @@ export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten}) 
     const navigation = useNavigation();
 
     return (
-        <TouchableRipple onPress={() => navigation.navigate('ScreenContent')} style={styles.touchableView}r>
+        <TouchableRipple onPress={() => navigation.navigate('ScreenContent')}>
             <View style={styles.miniContentView}>
             
                 <Image
@@ -28,7 +28,7 @@ export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten}) 
 
                 <View style={styles.rowContainer}>
                     
-                    <Icon name="user-alt" size={13} color="#999999" style={{marginTop:3}}/>
+                    <Icon name="user-alt" style={styles.miniContentIcon}/>
                     <Text style={styles.miniContentAuthor}>
                         {namaKreator.length > 20 ? `${namaKreator.substring(0, 20)}...` : namaKreator }
                     </Text>

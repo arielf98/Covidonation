@@ -11,15 +11,27 @@ export const styles = StyleSheet.create({
     // Top Bar
     topBarView:
     {
-        backgroundColor: 'white',
+        backgroundColor: Parent.colorWhite,
     },
     topBarIcon:
     {
-        color: Parent.greyColorLow,
+        color: Parent.colorGreyMin,
     },
     topBarText:
     {
-        color: Parent.greyColorMid,
+        color: Parent.colorGreyMid,
+    },
+    topBarView2:
+    {
+        backgroundColor: Parent.colorBlueMax,
+    },
+    topBarIcon2:
+    {
+        
+    },
+    topBarText2:
+    {
+        
     },
 
     // Top Carousel
@@ -31,17 +43,17 @@ export const styles = StyleSheet.create({
     // Section
     sectionTitle:
     {
-        color: Parent.defBlue,
-        fontSize: Parent.titleFontSize-2,
+        color: Parent.colorBlueMax,
+        fontSize: Parent.sizeFontMax-2,
         marginVertical: 10,
     },
 
     // Content
     contentType:
     {
-        backgroundColor: '#B3B3B3',
-        fontSize: Parent.defFontSize-2,
-        color: 'white',
+        backgroundColor: Parent.colorGreyMin,
+        fontSize: Parent.sizeFontMin,
+        color: Parent.colorWhite,
         marginVertical: 10,
         alignSelf: 'flex-start',
         borderRadius: 5,
@@ -50,15 +62,15 @@ export const styles = StyleSheet.create({
     },
     contentTitle:
     {
-        fontSize: Parent.titleFontSize,
-        color: Parent.greyColorMost,
+        fontSize: Parent.sizeFontMax,
+        color: Parent.colorGreyMax,
         fontWeight: 'bold',
         marginVertical: 10,
     },
     contentDesc:
     {
-        fontSize: Parent.defFontSize,
-        color: Parent.greyColorLow,
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMid,
     },
 
     // Author
@@ -71,22 +83,22 @@ export const styles = StyleSheet.create({
     authorName:
     {
         fontWeight: 'bold',
-        fontSize: Parent.defFontSize+2,
+        fontSize: Parent.sizeFontMid,
         marginTop: 10,
         marginLeft: 10,
-        color: Parent.greyColorMost
+        color: Parent.colorGreyMax
     },
 
     // Purchase Bar (Fixed Bottom)
     purchaseBarView:
     {
-        backgroundColor: '#5885AF',
+        backgroundColor: Parent.colorBlueMid,
         height: 60,
         flexDirection: 'row',
     },
     purchaseBarPrice:
     {
-        fontSize: Parent.titleFontSize-2,
+        fontSize: Parent.sizeFontMid,
         color: 'white',
         fontWeight: 'bold',
         marginLeft: 20,
@@ -94,8 +106,8 @@ export const styles = StyleSheet.create({
     },
     purchaseBarAction:
     {
-        backgroundColor: 'white',
-        fontSize: Parent.titleFontSize-2,
+        backgroundColor: Parent.colorWhite,
+        fontSize: Parent.sizeFontMid,
         color: '#5885AF',
         marginVertical: 10,
         alignSelf: 'flex-start',
@@ -107,6 +119,22 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginRight: 20,
     },
+
+    textDef:
+    {
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMid,
+    },
+    textBold:
+    {
+        fontWeight: 'bold',
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMax,
+    },
+    paymentImg:
+    {
+        // width:150,
+    }
 
 
 })

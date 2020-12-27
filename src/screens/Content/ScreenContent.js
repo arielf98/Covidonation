@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, View, Image, ScrollView } from 'react-native'
-import { Paragraph, Appbar } from 'react-native-paper';
+import { Text, View, Image, ScrollView, Alert } from 'react-native'
+import { Paragraph, Appbar, Button } from 'react-native-paper';
 import { styles } from '../../Style/ContentStyle'
 import { ItemTag } from '../../components'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -51,7 +51,7 @@ export default ScreenContent = () => {
             <Appbar.Header style={styles.topBarView}>
                 <Appbar.BackAction onPress={() => { navigation.goBack();}} style={styles.topBarIcon} />
                 <Appbar.Content title="Detail Konten"  style={styles.topBarText} />
-                <Appbar.Action icon="dots-vertical" style={styles.topBarIcon} />
+                <Appbar.Action icon="dots-vertical" style={styles.topBarIcon} onPress={ () => Alert.alert('Pilihan') } />
             </Appbar.Header>
 
             <View>
@@ -98,7 +98,8 @@ export default ScreenContent = () => {
 
             <View style={styles.purchaseBarView}>
                 <Text style={styles.purchaseBarPrice}>Rp {DataContent.hargaKonten}</Text>
-                <Text style={styles.purchaseBarAction}>BELI</Text>
+                {/* <Text style={styles.purchaseBarAction} onPress={() => navigation.navigate('ScreenPurchase')}>BELI</Text> */}
+                <Button mode="contained" onPress={() => navigation.navigate('ScreenPurchase')}>BELI</Button>
             </View>
 
         </ScrollView>

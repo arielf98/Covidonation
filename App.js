@@ -12,10 +12,10 @@ export default function App() {
 
     // ubah setiap icon dan nama pada bottom navigasi disini...
     const [routes] = useState([
-      { key: 'home', title: 'Awal', icon: 'home', color: '#3F51B5' },
-      { key: 'search', title: 'Pencarian', icon: 'magnify', color: '#009688' },
-      { key: 'notification', title: 'Notifikasi', icon: 'bell', color: '#795548'  },
-      { key: 'profile', title: 'Akun Saya', icon: 'account', color: '#607D8B' },
+      { key: 'home', title: 'Awal', icon: 'home', color: '#3797a4' },
+      { key: 'search', title: 'Pencarian', icon: 'magnify', color: '#3797a4' },
+      { key: 'notification', title: 'Notifikasi', icon: 'bell', color: '#3797a4'  },
+      { key: 'profile', title: 'Akun Saya', icon: 'account', color: '#3797a4' },
     ])
   
 
