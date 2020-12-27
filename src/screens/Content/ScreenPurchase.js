@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import { View, ScrollView, Text, Image, Alert } from 'react-native'
 import { Appbar } from 'react-native-paper';
 import { styles } from '../../Style/ContentStyle'
@@ -6,10 +6,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { DataTable, Button } from 'react-native-paper';
+import { store } from '../../Config/Contex/store'
+import { useBackHandler } from '@react-native-community/hooks'
 
 const ScreenPurchase = () => {
 
+    const globalState = useContext(store)
+    const { dispatch } = globalState
     const navigation = useNavigation();
+
+    useBackHandler(()=> {
+        navigation.goBack()
+
+        //melakukan dispatch pada action IS_HIDE di komponen item list kontent teratas...
+        dispatch({ type: 'IS_HIDE', payload: true })
+        return true
+    })
     
     return (
         <ScrollView
@@ -18,7 +30,14 @@ const ScreenPurchase = () => {
         >
 
             <Appbar.Header style={styles.topBarView2}>
-                <Appbar.BackAction onPress={() => { navigation.goBack();}} style={styles.topBarIcon2} />
+            <Appbar.BackAction onPress={() => { 
+                    navigation.goBack()
+
+                    //melakukan dispatch pada action IS_HIDE di komponen item list kontent teratas...
+                    return dispatch({ type: 'IS_HIDE', payload: true })
+                }}
+
+                     style={styles.topBarIcon2} />
                 <Appbar.Content title="Rincian Pembelian"  style={styles.topBarText2} />
             </Appbar.Header>
 

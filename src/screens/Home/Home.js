@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { SectionList} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { View, ScrollView } from 'react-native'
 import { Appbar } from 'react-native-paper';
 import { styles } from '../../Style/SearchStyle'
 import * as Parent from '../../Style/ParentStyle'
+import { ItemCardContent } from '../../components'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { colorGreyMin } from '../../Style/ParentStyle';
+import { store } from '../../Config/Contex/store'
+import { useBackHandler } from '@react-native-community/hooks'
 
 const DataKontenTerbaru = [
     {  
@@ -133,7 +135,19 @@ const DataKontenTerbaru = [
 
 const ScreenKontenTerbaru = () => {
 
+    //mengambil data dari global state 
+    // untuk lebih jelasnya baca tentang context pada react
+    const globalState = useContext(store)
+    const { dispatch } = globalState
     const navigation = useNavigation();
+
+    useBackHandler(()=> {
+        navigation.goBack()
+
+        //melakukan dispatch pada action IS_HIDE di komponen item list kontent teratas...
+        dispatch({ type: 'IS_HIDE', payload: false })
+        return true
+    })
 
     return (
         <ScrollView
@@ -143,7 +157,14 @@ const ScreenKontenTerbaru = () => {
         >
 
             <Appbar.Header style={styles.topBarView}>
-                <Appbar.BackAction onPress={() => { navigation.goBack();}} style={styles.topBarIcon} />
+            <Appbar.BackAction onPress={() => { 
+                    navigation.goBack()
+
+                    //melakukan dispatch pada action IS_HIDE di komponen item list kontent teratas...
+                    return dispatch({ type: 'IS_HIDE', payload: false })
+                }}
+
+                     style={styles.topBarIcon} />
                 <Appbar.Content title="Konten Terbaru"  style={styles.topBarText} />
             </Appbar.Header>
 
