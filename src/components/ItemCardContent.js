@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Text, View, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../Style/SearchStyle'
@@ -7,14 +7,28 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { ItemTag } from '../components'
 import { Divider, TouchableRipple } from 'react-native-paper';
+import { store } from '../Config/Contex/store'
 
 export default ItemCardContent = ({id, judulKonten, namaKreator, hargaKonten, gambarKonten, tag}) => {
 
     const navigation = useNavigation();
 
+    //mengambil data dari global state 
+    // untuk lebih jelasnya baca tentang context pada react
+    const globalState = useContext(store)
+    const { state, dispatch } = globalState
+
     return (
         <View>
-            <TouchableRipple onPress={() => navigation.navigate('ScreenContent')} style={styles.touchableView}>
+            <TouchableRipple onPress={() => {
+                navigation.navigate('ScreenContent')
+
+                //apakah card d klik dari mini card ? jika true akan menjalankan logic yang pertama dan sebaliknya...
+                const hide = state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) : null
+                const minicontent = dispatch({ type: 'IS_FROM_MINI_CONTENT', payload: false })
+                return hide, minicontent
+            }}
+             style={styles.touchableView}>
                 <View style={styles.cardContentView}>
                     
                         <View>

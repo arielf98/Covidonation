@@ -5,7 +5,11 @@ import { Card, Paragraph, Title } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ItemTag } from '../../components'
 
+
 export default ListItems = ({ title, author, price, tag }) => {
+
+
+
     return (
 
         // item yang akan di loop didalam Section List
@@ -18,7 +22,7 @@ export default ListItems = ({ title, author, price, tag }) => {
                               </Title> 
                         <Paragraph >
                             <Icon
-                                name="currency-usd-circle-outline"
+                                name="tag"
                                 size={18} /> {price}
                         </Paragraph>
                         <Paragraph style={styles.paragraph} >
@@ -42,11 +46,7 @@ export default ListItems = ({ title, author, price, tag }) => {
                     })}
                  
                 </View>
-               
-
                 </Card>
-          
-         
             </View>
         )
 }

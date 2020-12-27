@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Text, View, ScrollView } from 'react-native'
 import { styles } from '../../Style/SearchStyle'
 import { ScreenKontenTeratas, SectionTag, SectionPopular, SectionNewest } from '../Search'
@@ -9,8 +9,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenContent } from '../Content'
 import { TouchableRipple } from 'react-native-paper';
+import { store } from '../../Config/Contex/store'
 
-const TheApp = () => {
+
+
+export const TheApp = () => {
+
+       //mengambil data dari global state 
+    // untuk lebih jelasnya baca tentang context pada react
+    const globalState = useContext(store)
+    const { dispatch } = globalState
 
     const navigation = useNavigation();
 
@@ -38,7 +46,13 @@ const TheApp = () => {
 
             {/* Konten teratas */}
             <View style={styles.sectionView}>
-                <TouchableRipple onPress={() => navigation.navigate('ScreenKontenTeratas')} style={styles.touchableView}>
+                <TouchableRipple onPress={() => {
+                    navigation.navigate('ScreenKontenTeratas')
+                    
+                    //melaukan dispatch pada action IS_HIDE pada component search screen
+                    return dispatch({ type: 'IS_HIDE', payload: true })
+                    }} 
+                    style={styles.touchableView}>
                     <View style={styles.sectionHeader}>
                         <Text style={styles.sectionTitle}>Konten Teratas</Text>
                         <Icon name="chevron-right" style={styles.sectionIcon}/>
@@ -63,6 +77,7 @@ const TheApp = () => {
 const Stack = createStackNavigator();
 
 function ScreenSearch() {
+
     return (
       <NavigationContainer>
         <Stack.Navigator

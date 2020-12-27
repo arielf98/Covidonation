@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import { Text, View, Image, ScrollView } from 'react-native'
 import { Paragraph, Appbar } from 'react-native-paper';
 import { styles } from '../../Style/ContentStyle'
@@ -7,6 +7,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { store } from '../../Config/Contex/store'
+import { useBackHandler } from '@react-native-community/hooks'
 
 const DataContent = 
     {
@@ -38,10 +40,34 @@ const DataContent =
     }
 ;
 
+
+
+
 export default ScreenContent = () => {
 
+    //ambil kondisi dari globalstate
+    //mengambil data dari global state 
+    // untuk lebih jelasnya baca tentang context pada react
+    const globalState = useContext(store)
+    const {state, dispatch} = globalState
     const navigation = useNavigation();
+    
 
+    useBackHandler(()=> {
+        navigation.goBack()
+
+        //apakah card d klik dari mini card ? jika true akan menjalankan logic yang pertama dan sebaliknya...
+        if (state.isFromMiniContent){
+            state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
+                dispatch({ type: 'IS_HIDE', payload: true })
+        } else {
+            state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) :
+                dispatch({ type: 'IS_HIDE', payload: false })
+        }
+        return true
+    })
+
+    
     return (
         <ScrollView
         showsVerticalScrollIndicator={false}
@@ -49,7 +75,22 @@ export default ScreenContent = () => {
         >
 
             <Appbar.Header style={styles.topBarView}>
-                <Appbar.BackAction onPress={() => { navigation.goBack();}} style={styles.topBarIcon} />
+                <Appbar.BackAction onPress={() => { 
+                    navigation.goBack()
+
+                    //apakah card d klik dari mini card ? jika true akan menjalankan logic yang pertama dan sebaliknya...
+                    if (state.isFromMiniContent) {
+                        return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
+                            dispatch({ type: 'IS_HIDE', payload: true })
+                    } else {
+                       return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) :
+                            dispatch({ type: 'IS_HIDE', payload: false })
+                    }
+
+                    }}
+                     style={styles.topBarIcon} />
+
+
                 <Appbar.Content title="Detail Konten"  style={styles.topBarText} />
                 <Appbar.Action icon="dots-vertical" style={styles.topBarIcon} />
             </Appbar.Header>
