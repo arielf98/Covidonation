@@ -44,7 +44,7 @@ export default function Profile() {
                         <View style={{ marginTop: 20, marginBottom: 20 }} >
                             <SettingCard
                                 icon="sign-out-alt"
-                                nama="Tentang" />
+                                nama="Keluar" />
                         </View>
                 
                 </View>
