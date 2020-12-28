@@ -1,7 +1,7 @@
 # CoViDonation
 
 ### About
-CoViDonation is a digital content marketplace platform that aims to collect donations to accelerate COVID-19 mitigation in Indonesia.
+CoViDonation, is a digital content marketplace platform that aims to collect donations to accelerate COVID-19 mitigation in Indonesia.
 
 Build with:
   - UI/UX: Adobe XD

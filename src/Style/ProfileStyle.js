@@ -69,6 +69,14 @@ export const styles = StyleSheet.create({
         alignItems: 'baseline'
     },
 
+    kotakKoleksiIcon: {
+        position: 'absolute',
+        marginLeft: '96%',
+        marginTop: 7,
+        // marginBottom: 30,
+        // backgroundColor: 'yellow'
+    },
+
     profileEmail: {
         position: 'absolute',
         marginLeft: '35%',
@@ -99,7 +107,8 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 10,
         marginBottom: 30,
-        color: 'grey'
+        color: 'grey',
+        // backgroundColor: 'yellow'
 
     },
  

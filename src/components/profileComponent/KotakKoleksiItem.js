@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, FlatList, SafeAreaView} from 'react-native'
 import { styles } from '../../Style/ProfileStyle'
 import { ItemKoleksi } from './ItemKoleksi'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import { TouchableRipple } from 'react-native-paper'
 
 const DATA = [
     {
@@ -28,22 +30,36 @@ export default function KotakKoleksiItem() {
     )
 
     return (
+     
         <SafeAreaView style={styles.safeAreaViewKotakKoleksi}>
-
         <View style={styles.itemKotakKoleksi}>
-                <Text style={styles.titleKotakKoleksi } > Kotak Koleksi </Text>
 
-
-                {/* flatlist card untuk setiap card yang ada pada kotak Koleksi */}
-                <FlatList
-                    data={DATA}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal={true}
-                />
+           
+                    <TouchableRipple                    
+                    rippleColor="rgba(0, 0, 0, .32)"
+                    style={{ marginBottom: 10 }}
+                    borderless= {true}  >
+                        
+                        <View style>
+                            <Icon   style={styles.kotakKoleksiIcon}
+                                    name="chevron-right"
+                                    size={15} />
+                                <Text style={styles.titleKotakKoleksi } > Kotak Koleksi </Text>
+                            </View>
+                    </TouchableRipple>
+                
+      
+                    {/* flatlist card untuk setiap card yang ada pada kotak Koleksi */}
+                    <FlatList
+                        data={DATA}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        showsHorizontalScrollIndicator={false}
+                        horizontal={true}
+                    />
 
         </View>
         </SafeAreaView>
+      
     )
 }
