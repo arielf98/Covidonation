@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     // Top Carousel
     previewImg:
     {
-        height:250
+        height:300
     },
 
     // Section
@@ -92,32 +92,36 @@ export const styles = StyleSheet.create({
     // Purchase Bar (Fixed Bottom)
     purchaseBarView:
     {
-        backgroundColor: Parent.colorBlueMid,
+        backgroundColor: Parent.colorBlueMax,
         height: 60,
         flexDirection: 'row',
     },
     purchaseBarPrice:
     {
-        fontSize: Parent.sizeFontMid,
+        fontSize: Parent.sizeFontMax,
         color: 'white',
         fontWeight: 'bold',
         marginLeft: 20,
-        marginTop: 15,
+        marginTop: 14,
     },
     purchaseBarAction:
     {
         backgroundColor: Parent.colorWhite,
-        fontSize: Parent.sizeFontMid,
-        color: '#5885AF',
         marginVertical: 10,
         alignSelf: 'flex-start',
         borderRadius: 5,
-        paddingVertical: 5,
-        paddingHorizontal: 20,
         position: 'absolute',
         right: 0,
-        fontWeight: 'bold',
         marginRight: 20,
+    },
+    purchaseBarActionText:
+    {
+        fontSize: Parent.sizeFontMid,
+    },
+    buttonTextSecondary:
+    {
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMax,
     },
 
     textDef:
@@ -133,7 +137,22 @@ export const styles = StyleSheet.create({
     },
     paymentImg:
     {
-        // width:150,
+        height: 30,
+        position: 'absolute',
+        left: -40,
+    },
+
+    paymentMethodText:
+    {
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMid,
+        marginVertical: 15,
+    },
+    selectedPaymentText:
+    {
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorGreyMid,
+        fontWeight: 'bold',
     }
 
 

@@ -7,7 +7,7 @@ const DataSectionNewest = [
         id: 1,
         judulKonten: "Too Much to Ask",
         namaKreator: "Niall Horan",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/600",
     },
     {  
         id: 2,
@@ -19,7 +19,7 @@ const DataSectionNewest = [
         id: 3,
         judulKonten: "Stuck with U",
         namaKreator: "Ariana Grande & Justin Bieber",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/800",
     },
 ];
 

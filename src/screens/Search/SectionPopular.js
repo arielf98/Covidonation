@@ -7,19 +7,19 @@ const DataSectionPopular = [
         id: 1,
         judulKonten: "Rolling in The Deep",
         namaKreator: "Adele",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/900",
     },
     {  
         id: 2,
         judulKonten: "Kangen",
         namaKreator: "Dewa 19",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/800",
     },
     {  
         id: 3,
         judulKonten: "Dynamite",
         namaKreator: "BTS",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/500",
     },
 ];
 
