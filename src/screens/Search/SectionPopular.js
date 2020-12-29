@@ -40,6 +40,7 @@ const SectionPopular = () => {
                     judulKonten={prop.judulKonten}
                     namaKreator={prop.namaKreator}
                     gambarKonten={prop.gambarKonten}
+                    navigasi="ScreenContent"
                     />
                 );
             })}

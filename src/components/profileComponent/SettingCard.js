@@ -7,7 +7,7 @@ import { styles } from '../../Style/ProfileStyle'
 export default function SettingCard({icon, nama}) {
     return (
         <View style={styles.settingCard}>
-            <Card>
+            <Card style={styles.cardSetting}>
                 <Card.Content >
                     <Icon
                         name={icon}

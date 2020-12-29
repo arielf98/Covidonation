@@ -9,7 +9,7 @@ import { TouchableRipple } from 'react-native-paper';
 import { store } from '../Config/Contex/store'
 
 
-export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten}) => {
+export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten, navigasi}) => {
 
     const navigation = useNavigation();
 
@@ -20,7 +20,7 @@ export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten}) 
 
     return (
         <TouchableRipple onPress={() => {
-                navigation.navigate('ScreenContent')
+                navigation.navigate(navigasi)
 
                 // melakukan dispatch pada action IS_HIDE dan IS_FROM_MINI_CONTENT pada component item mini
                 const hide = dispatch({ type: 'IS_HIDE', payload: true })

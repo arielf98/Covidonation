@@ -3,31 +3,36 @@ import { View, ScrollView, SafeAreaView} from 'react-native'
 import KotakKoleksiItem from '../../components/profileComponent/KotakKoleksiItem'
 import SettingCard from '../../components/profileComponent/SettingCard'
 import HeaderProfile from './HeaderProfile'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ListKotakKoleksi from './ListKotakKoleksi'
+import { ScreenContent, ScreenPurchase } from '../Content'
 
 
 
-export default function Profile() {
+export function ProfileRoute() {
 
     return (
+
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView 
-            showsVerticalScrollIndicator={false} >
-                <View style={{ backgroundColor:"white" }} >
-                    <HeaderProfile/>
-                    <KotakKoleksiItem/>
+            <ScrollView
+                showsVerticalScrollIndicator={false} >
+                <View style={{ backgroundColor: "white" }} >
+                    <HeaderProfile />
+                    <KotakKoleksiItem />
 
                     {/* iterate setiap setting card komponen */}
-                        <SettingCard
-                            icon="question-circle"
-                            nama="Pusat Bantuan" />
+                    <SettingCard
+                        icon="question-circle"
+                        nama="Pusat Bantuan" />
 
-                        <SettingCard
+                    <SettingCard
                         icon="cog"
                         nama="Settings" />
 
-                        {/* Information Settings */}
- {/* --------------------------------------------------------------------------------------- */}
-                        <View style={{ marginTop: 20 }}>
+                    {/* Information Settings */}
+                    {/* --------------------------------------------------------------------------------------- */}
+                    <View style={{ marginTop: 20 }}>
                         <SettingCard
                             icon="info-circle"
                             nama="Ketentuan Layanan" />
@@ -37,18 +42,40 @@ export default function Profile() {
                         <SettingCard
                             icon="info-circle"
                             nama="Tentang" />
-                        </View>
+                    </View>
 
-                            {/* Keluar */}
- {/* --------------------------------------------------------------------------------------- */}
-                        <View style={{ marginTop: 20, marginBottom: 20 }} >
-                            <SettingCard
-                                icon="sign-out-alt"
-                                nama="Keluar" />
-                        </View>
-                
+                    {/* Keluar */}
+                    {/* --------------------------------------------------------------------------------------- */}
+                    <View style={{ marginTop: 20, marginBottom: 20 }} >
+                        <SettingCard
+                            icon="sign-out-alt"
+                            nama="Keluar" />
+                    </View>
+
                 </View>
             </ScrollView>
         </SafeAreaView>
+
     )
 }
+
+const Stack = createStackNavigator();
+
+export default function Profile() {
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="profile"
+                screenOptions={{headerShown : false}}>
+
+                <Stack.Screen name="profile" component={ProfileRoute} />
+                <Stack.Screen name="listKotakKoleksi" component={ListKotakKoleksi} />
+                <Stack.Screen name="ScreenContent" component={ScreenContent} />
+
+
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
+}
+
