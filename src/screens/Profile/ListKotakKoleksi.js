@@ -5,19 +5,19 @@ import ItemKoleksi from './ItemKoleksi'
 
 const DATA = [
     {
-        id: 1,
+        id: "1",
         judulKonten: "Too Much to Ask",
         namaKreator: "Niall Horan",
         gambarKonten: "https://picsum.photos/700",
     },
     {
-        id: 2,
+        id: "2",
         judulKonten: "Again",
         namaKreator: "YUI",
         gambarKonten: "https://picsum.photos/700",
     },
     {
-        id: 3,
+        id: "3",
         judulKonten: "Stuck with U",
         namaKreator: "Ariana Grande & Justin Bieber",
         gambarKonten: "https://picsum.photos/700",
