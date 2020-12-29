@@ -16,7 +16,7 @@ const DataKontenTerbaru = [
         judulKonten: "Dynamite",
         namaKreator: "BTS",
         hargaKonten: "Rp 120.000",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/600",
         tag: [
             {
                 id: 1,
@@ -40,7 +40,7 @@ const DataKontenTerbaru = [
         judulKonten: "Rolling in The Deep",
         namaKreator: "Adele",
         hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/800",
         tag: [
             {
                 id: 1,
@@ -88,7 +88,7 @@ const DataKontenTerbaru = [
         judulKonten: "Rolling in The Deep",
         namaKreator: "Adele",
         hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/900",
         tag: [
             {
                 id: 1,
@@ -112,7 +112,7 @@ const DataKontenTerbaru = [
         judulKonten: "Kangen",
         namaKreator: "Dewa 19",
         hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/700",
+        gambarKonten: "https://picsum.photos/500",
         tag: [
             {
                 id: 1,

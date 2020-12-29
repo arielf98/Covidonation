@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react'
-import { Text, View, Image, ScrollView, Alert } from 'react-native'
+import { Text, View, Image, ScrollView, Dimensions, Alert } from 'react-native'
 import { Paragraph, Appbar, Button } from 'react-native-paper';
 import { styles } from '../../Style/ContentStyle'
 import { ItemTag } from '../../components'
@@ -9,13 +9,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { store } from '../../Config/Contex/store'
 import { useBackHandler } from '@react-native-community/hooks'
+import { SectionCarousel } from '../Content'
+import LinearGradient from 'react-native-linear-gradient';
+import * as Parent from '../../Style/ParentStyle'
 
 const DataContent = 
     {
         judulKonten: "Webinar Dasar Adobe Premiere",
         tipeKonten: "Produk Digital",
         hargaKonten: "200.000",
-        deskripsiKonten: "Webinar Dasar Adobe Premiere oleh Den Mustopa. Diadakan pada Kamis, 01 Oktober 2020 jam 11:00 sampai 15:00 WIB. Webinar diadakan di platfrom Zoom. Peserta yang mengikuti webinar akan memperoleh sertifikat elektronik.",
+        deskripsiKonten: "Sed sit amet vehicula magna, at ultricies metus. Mauris sed lobortis justo, eu sagittis ex. Aliquam tempus velit id massa cursus posuere. Sed accumsan ex tincidunt ipsum commodo, convallis tempor massa dictum. Maecenas eros felis, vehicula at pretium vel, rutrum eu nisl. Cras gravida justo dui, sed scelerisque nunc lobortis sit amet. Quisque sed neque eget libero gravida interdum sed sit amet neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec vehicula ullamcorper dolor, malesuada luctus leo iaculis a. Nam pellentesque magna rhoncus condimentum auctor.",
         tag: [
             {  
                 id: 1,
@@ -45,18 +48,13 @@ const DataContent =
 
 export default ScreenContent = () => {
 
-    //ambil kondisi dari globalstate
-    //mengambil data dari global state 
-    // untuk lebih jelasnya baca tentang context pada react
     const globalState = useContext(store)
     const {state, dispatch} = globalState
     const navigation = useNavigation();
-    
 
     useBackHandler(()=> {
         navigation.goBack()
 
-        //apakah card d klik dari mini card ? jika true akan menjalankan logic yang pertama dan sebaliknya...
         if (state.isFromMiniContent){
             state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
                 dispatch({ type: 'IS_HIDE', payload: true })
@@ -69,48 +67,57 @@ export default ScreenContent = () => {
 
     
     return (
+    <View style={{flex: 1}}>
+
         <ScrollView
         showsVerticalScrollIndicator={false}
         style={{backgroundColor:'white'}}
         >
 
-            <Appbar.Header style={styles.topBarView}>
-                <Appbar.BackAction onPress={() => { 
-                    navigation.goBack()
+            <LinearGradient
+                colors={['rgba(0, 0, 0, 0.7)', 'rgba(0, 0, 0, 0)']}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    zIndex: 2,
+                    width: Dimensions.get('window').width,
+                    height: 60
+                }}
+            >
+                <Appbar.Header style={{backgroundColor: 'rgba(0, 0, 0, 0)'}}>
+                    <Appbar.BackAction onPress={() => { 
+                        navigation.pop()
 
-                    //apakah card d klik dari mini card ? jika true akan menjalankan logic yang pertama dan sebaliknya...
-                    if (state.isFromMiniContent) {
-                        return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
-                            dispatch({ type: 'IS_HIDE', payload: true })
-                    } else {
-                       return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) :
-                            dispatch({ type: 'IS_HIDE', payload: false })
-                    }
+                        if (state.isFromMiniContent) {
+                            return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
+                                dispatch({ type: 'IS_HIDE', payload: true })
+                        } else {
+                        return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) :
+                                dispatch({ type: 'IS_HIDE', payload: false })
+                        }
 
-                    }}
-                     style={styles.topBarIcon} />
-
-
-                <Appbar.Content title="Detail Konten"  style={styles.topBarText} />
-                <Appbar.Action icon="dots-vertical" style={styles.topBarIcon} onPress={ () => Alert.alert('Pilihan') } />
-            </Appbar.Header>
+                        }}
+                        style={styles.topBarIcon}
+                    />
+                    <Appbar.Content/>
+                    <Appbar.Action icon="dots-vertical" style={styles.topBarIcon} onPress={ () => Alert.alert('Pilihan') } />
+                </Appbar.Header>
+            </LinearGradient>
 
             <View>
-                <Image
-                    style={styles.previewImg}
-                    resizeMode="cover"
-                    source={require('../../img/preview/borobudur.jpg')}
-                />
+                <SectionCarousel />
             </View>
 
             <View style={{padding:10}}>
-                <Text style={styles.contentType}>{DataContent.tipeKonten}</Text>
 
                 <Text style={styles.contentTitle}>{DataContent.judulKonten}</Text>
 
                 <Text style={styles.sectionTitle}>Deskripsi</Text>
 
                 <Paragraph style={styles.contentDesc}>{DataContent.deskripsiKonten}</Paragraph>
+
+                <Text style={styles.contentType}>{DataContent.tipeKonten}</Text>
                
                 {/* Tag */}
                 <View style={{
@@ -124,7 +131,6 @@ export default ScreenContent = () => {
                     );
                     })}
                 </View>
-                
 
                 <Text style={styles.sectionTitle}>Konten oleh</Text>
                 <TouchableOpacity style={styles.rowContainer}>
@@ -137,12 +143,21 @@ export default ScreenContent = () => {
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.purchaseBarView}>
-                <Text style={styles.purchaseBarPrice}>Rp {DataContent.hargaKonten}</Text>
-                {/* <Text style={styles.purchaseBarAction} onPress={() => navigation.navigate('ScreenPurchase')}>BELI</Text> */}
-                <Button mode="contained" onPress={() => navigation.navigate('ScreenPurchase')}>BELI</Button>
-            </View>
-
         </ScrollView>
+
+        <View style={styles.purchaseBarView}>
+            <Text style={styles.purchaseBarPrice}>Rp {DataContent.hargaKonten}</Text>
+            <Button
+                style={styles.purchaseBarAction}
+                labelStyle={styles.purchaseBarActionText}
+                mode="outlined"
+                onPress={() => navigation.navigate('ScreenPurchase')}
+                color={Parent.colorBlueMax}
+            >
+                Beli
+            </Button>
+        </View>
+
+    </View>
     )
 }

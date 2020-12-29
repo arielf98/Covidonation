@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     sectionIcon:
     {
         fontSize: Parent.sizeFontMin,
-        color: Parent.colorBlueMid,
+        color: Parent.colorBlueMax,
         position: 'absolute',
         right: 0,
         marginRight: 5,
@@ -52,13 +52,13 @@ export const styles = StyleSheet.create({
     // Mini Content
     miniContentView:
     {
-        width: 210,
-        marginLeft: 10,
+        width: 170,
+        marginLeft: 0,
     },
     miniContentImg:
     {
-        width: 180,
-        height: 150,
+        width: 155,
+        height: 130,
         marginBottom: 10,
         borderRadius: 15,
     },
@@ -91,6 +91,7 @@ export const styles = StyleSheet.create({
     searchBarText:
     {
         color: Parent.colorGreyMid,
+        fontSize: Parent.sizeFontMid,
     },
 
     // Card Content

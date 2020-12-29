@@ -5,7 +5,7 @@ import { BottomNavigation, Text } from 'react-native-paper';
 import Notif from './src/screens/Notifikasi/Notif';
 import { store } from './src/Config/Contex/store'
 import Profile from './src/screens/Profile/Profile';
-
+import * as Parent from './src/Style/ParentStyle'
 
 const ProfileRoute = () => <Text>Profile</Text>;
 
@@ -19,10 +19,10 @@ export default function App() {
 
     // ubah setiap icon dan nama pada bottom navigasi disini...
     const [routes] = useState([
-      { key: 'home', title: 'Awal', icon: 'home', color: '#3797a4' },
-      { key: 'search', title: 'Pencarian', icon: 'magnify', color: '#3797a4' },
-      { key: 'notification', title: 'Notifikasi', icon: 'bell', color: '#3797a4'  },
-      { key: 'profile', title: 'Akun Saya', icon: 'account', color: '#3797a4' },
+      { key: 'home', title: 'Awal', icon: 'home', color: Parent.colorBlueMax },
+      { key: 'search', title: 'Pencarian', icon: 'magnify', color: Parent.colorBlueMax },
+      { key: 'notification', title: 'Notifikasi', icon: 'bell', color: Parent.colorBlueMax  },
+      { key: 'profile', title: 'Akun Saya', icon: 'account', color: Parent.colorBlueMax },
     ])
   
 

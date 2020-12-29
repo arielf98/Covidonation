@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
+import * as Parent from '../Style/ParentStyle'
 
 export default ItemTag = prop => {
     return (
@@ -15,7 +16,7 @@ export default ItemTag = prop => {
         }}>
             <Text style={{
                 color: prop.warna,
-                fontSize: 14,
+                fontSize: Parent.sizeFontMin,
             }}>
                 {prop.teks}
             </Text>

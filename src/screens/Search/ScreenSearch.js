@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { ScreenContent, ScreenPurchase } from '../Content'
+import { ScreenContent, ScreenPaymentMethod, ScreenPurchase } from '../Content'
 import { TouchableRipple } from 'react-native-paper';
 import { store } from '../../Config/Contex/store'
 
@@ -94,6 +94,7 @@ function ScreenSearch() {
           <Stack.Screen name="ScreenContent" component={ScreenContent} />
           <Stack.Screen name="ScreenKontenTeratas" component={ScreenKontenTeratas} />
           <Stack.Screen name="ScreenKontenTerbaru" component={ScreenKontenTerbaru} />
+          <Stack.Screen name="ScreenPaymentMethod" component={ScreenPaymentMethod} />
           <Stack.Screen name="ScreenPurchase" component={ScreenPurchase} />
         </Stack.Navigator>
       </NavigationContainer>
