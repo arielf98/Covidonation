@@ -6,7 +6,7 @@ import HeaderProfile from './HeaderProfile'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ListKotakKoleksi from './ListKotakKoleksi'
-import { ScreenContent, ScreenPurchase } from '../Content'
+import { ScreenContent, ScreenPurchase, ScreenPaymentMethod } from '../Content'
 import { store } from '../../Config/Contex/store'
 import DetailKotakKoleksi from './DetailKotakKoleksi'
 
@@ -79,6 +79,8 @@ export default function Profile() {
                 <Stack.Screen name="Kotak Koleksi" component={ListKotakKoleksi} />
                 <Stack.Screen name="ScreenContent" component={ScreenContent} />
                 <Stack.Screen name="DetailKotakKoleksi" component={DetailKotakKoleksi} />
+                <Stack.Screen name="ScreenPaymentMethod" component={ScreenPaymentMethod} />
+                <Stack.Screen name="ScreenPurchase" component={ScreenPurchase} />
 
 
             </Stack.Navigator>
