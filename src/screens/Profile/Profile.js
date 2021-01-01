@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { View, ScrollView, SafeAreaView} from 'react-native'
 import KotakKoleksiItem from '../../components/profileComponent/KotakKoleksiItem'
 import SettingCard from '../../components/profileComponent/SettingCard'
@@ -7,10 +7,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ListKotakKoleksi from './ListKotakKoleksi'
 import { ScreenContent, ScreenPurchase } from '../Content'
+import { store } from '../../Config/Contex/store'
+import DetailKotakKoleksi from './DetailKotakKoleksi'
 
 
 
 export function ProfileRoute() {
+
 
     return (
 
@@ -63,15 +66,19 @@ const Stack = createStackNavigator();
 
 export default function Profile() {
 
+    const globalState = useContext(store)
+    const { state } = globalState
+
     return (
         <NavigationContainer>
             <Stack.Navigator
                 initialRouteName="profile"
-                screenOptions={{headerShown : false}}>
+                screenOptions={{headerShown : false}} >
 
                 <Stack.Screen name="profile" component={ProfileRoute} />
-                <Stack.Screen name="listKotakKoleksi" component={ListKotakKoleksi} />
+                <Stack.Screen name="Kotak Koleksi" component={ListKotakKoleksi} />
                 <Stack.Screen name="ScreenContent" component={ScreenContent} />
+                <Stack.Screen name="DetailKotakKoleksi" component={DetailKotakKoleksi} />
 
 
             </Stack.Navigator>

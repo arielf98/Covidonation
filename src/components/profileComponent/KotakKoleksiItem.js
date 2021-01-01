@@ -1,11 +1,12 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { View, Text, FlatList, SafeAreaView} from 'react-native'
 import { styles } from '../../Style/ProfileStyle'
-import { ItemKoleksi } from './ItemKoleksi'
+// import { ItemKoleksi } from './ItemKoleksi'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { TouchableRipple } from 'react-native-paper'
 import ItemMiniContent from '../ItemMiniContent'
 import { useNavigation } from '@react-navigation/native';
+import { store } from '../../Config/Contex/store'
 
 const DATA = [
     {
@@ -32,6 +33,10 @@ const DATA = [
 
 export default function KotakKoleksiItem() {
 
+    const globalState = useContext(store)
+    const {dispatch} = globalState
+
+
     const navigation = useNavigation()
 
     const renderItem = ({ item }) => (
@@ -51,10 +56,14 @@ export default function KotakKoleksiItem() {
 
            
                     <TouchableRipple  
-                    onPress={() => navigation.navigate('listKotakKoleksi')}                  
-                    rippleColor="rgba(0, 0, 0, .32)"
-                    style={{ marginBottom: 10 }}
-                    borderless= {true}  >
+                    onPress={() => {
+                        navigation.navigate("Kotak Koleksi")
+                        dispatch({ type: 'IS_HIDE', payload: true })
+                    }}
+
+                        rippleColor="rgba(0, 0, 0, .32)"
+                        style={{ marginBottom: 10 }}
+                        borderless= {true}  >
                         
                         <View style>
                             <Icon   style={styles.kotakKoleksiIcon}

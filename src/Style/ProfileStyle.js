@@ -66,7 +66,8 @@ export const styles = StyleSheet.create({
     itemKotakKoleksi: {
         // backgroundColor: 'pink',
         height: 280,
-        marginBottom: 20
+        marginBottom: 20,
+        marginLeft: 15 
     },
 
     kotakKoleksiCard: {
@@ -157,5 +158,28 @@ export const styles = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 7
     },
+
+
+     // --------------------------- style detail kotak koleksi---------------------------
+
+
+    attachmentKotakKoleksiText: {
+        position: 'absolute',
+        marginLeft: 45,
+        marginTop: 8
+    },
+    attachmentKotakKoleksiIcon : {
+        position: 'absolute',
+        marginLeft: '95%',
+        marginVertical: 13
+
+    },
+    attachmentCard: { 
+        backgroundColor: '#e9ecef',
+         marginVertical: 10, 
+         paddingVertical: 10, 
+         marginHorizontal: 10,
+         borderRadius: 3
+        },
  
 })
