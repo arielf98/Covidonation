@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import UnderLine from '../../components/NotifComponent/UnderLine'
 import { styles } from '../../Style/NotifStyle'
 
 
@@ -37,12 +38,7 @@ export default function NotifList() {
 
 
 
-        {/* //garis pada bawah kontent */}
-        <View style={styles.notifBottomLine}>
-
-        </View>
-
-
+     <UnderLine/>
 
 
         </>

@@ -21,7 +21,7 @@ const DATA = [
 
 //untuk mengambil lebar dimension yang ada pada layar
 export const SLIDER_WIDTH = Dimensions.get('window').width
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7) + 100
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7) + 120
 
 
 
@@ -52,7 +52,7 @@ export default function CarouselView() {
       <>
       <View style={styles.carouselContainer} >
         <Carousel
-          layout="tinder"
+          layout="stack"
           layoutCardOffset={9}
           ref={isCarousel}
           data={DATA}

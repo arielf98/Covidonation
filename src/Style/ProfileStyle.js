@@ -31,6 +31,18 @@ export const styles = StyleSheet.create({
         
     },
 
+    cardSetting: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+
+        elevation: 3,
+    },
+
     profileName: {
         position: 'absolute',
         marginLeft: '35%',
@@ -53,7 +65,9 @@ export const styles = StyleSheet.create({
 
     itemKotakKoleksi: {
         // backgroundColor: 'pink',
-        height: 260
+        height: 280,
+        marginBottom: 20,
+        marginLeft: 15 
     },
 
     kotakKoleksiCard: {
@@ -111,6 +125,61 @@ export const styles = StyleSheet.create({
         // backgroundColor: 'yellow'
 
     },
- 
 
+
+    // --------------------------- style item kotak koleksi---------------------------
+
+    itemKoleksiTitle: { 
+        position: 'absolute',
+         marginLeft: 125,
+          marginTop: 25
+         },
+
+    itemKoleksiIcon:  { 
+        position: 'absolute',
+        marginLeft: 130,
+        marginTop: 70
+    },
+
+    itemKoleksiAuthor: {
+        marginLeft: 150,
+        marginTop: 70,
+        position: 'absolute'
+    },
+
+    itemKoleksiCard: {
+        marginHorizontal: 5, 
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7
+    },
+
+
+     // --------------------------- style detail kotak koleksi---------------------------
+
+
+    attachmentKotakKoleksiText: {
+        position: 'absolute',
+        marginLeft: 45,
+        marginTop: 8
+    },
+    attachmentKotakKoleksiIcon : {
+        position: 'absolute',
+        marginLeft: '95%',
+        marginVertical: 13
+
+    },
+    attachmentCard: { 
+        backgroundColor: '#e9ecef',
+         marginVertical: 10, 
+         paddingVertical: 10, 
+         marginHorizontal: 10,
+         borderRadius: 3
+        },
+ 
 })
