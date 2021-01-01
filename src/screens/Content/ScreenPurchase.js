@@ -10,6 +10,24 @@ import { store } from '../../Config/Contex/store'
 import { useBackHandler } from '@react-native-community/hooks'
 import * as Parent from '../../Style/ParentStyle'
 
+const DataPaymentMethod = [
+    {
+        id: 1,
+        namaPembayaran: "Dana",
+        imgPembayaran: require('../../img/paymentMethod/dana.png'),
+    },
+    {
+        id: 2,
+        namaPembayaran: "OVO",
+        imgPembayaran: require('../../img/paymentMethod/ovo.png'),
+    },
+    {
+        id: 3,
+        namaPembayaran: "GO-PAY",
+        imgPembayaran: require('../../img/paymentMethod/gopay.png'),
+    }
+];
+
 const DataPurchase = 
 {
     untukDonasi: "Rp 170.000",
@@ -17,34 +35,13 @@ const DataPurchase =
     totalBayar: "Rp 200.000",
 }
 
-const DataPaymentMethod = [
-    {
-        id: 1,
-        metodePembayaran: "dana",
-        namaPembayaran: "Dana",
-    },
-    {
-        id: 2,
-        metodePembayaran: "ovo",
-        namaPembayaran: "OVO",
-    },
-    {
-        id: 3,
-        metodePembayaran: "gopay",
-        namaPembayaran: "GO-PAY",
-    }
-]
-
 const ScreenPurchase = () => {
 
     const globalState = useContext(store)
     const {state, dispatch} = globalState
     const navigation = useNavigation()
 
-    const imgPembayaran = "require('../../img/paymentMethod/" + state.metodePembayaran + ".png')"
-    const namaPembayaran = DataPaymentMethod.filter(obj => {
-        return obj.metodePembayaran === state.metodePembayaran
-      })
+    const DataPilihPembayaran = DataPaymentMethod[state.metodePembayaran-1]
 
     useBackHandler(()=> {
         navigation.goBack()
@@ -62,15 +59,14 @@ const ScreenPurchase = () => {
             <Appbar.Header style={styles.topBarView2}>
             <Appbar.BackAction onPress={() => { 
                     navigation.goBack()
-                    return dispatch({ type: 'IS_HIDE', payload: true })
+                    dispatch({ type: 'IS_HIDE', payload: true })
                 }}
-
-                     style={styles.topBarIcon2} />
+                style={styles.topBarIcon2} />
                 <Appbar.Content title="Pembelian Konten" style={styles.topBarText2} />
             </Appbar.Header>
 
             <View style={{padding:10}}>
-                <Text style={styles.sectionTitle}>Rincian pembayaran</Text>
+                <Text style={styles.sectionTitle}>Rincian Pembayaran</Text>
                 <DataTable>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textDef}>Untuk donasi</Text></DataTable.Cell>
@@ -91,12 +87,11 @@ const ScreenPurchase = () => {
                 <Text style={styles.sectionTitle}>Metode Pembayaran</Text>
                 <View style={{height:10}}/>
                 <View style={styles.rowContainer}>
-                    {/* <Image
+                    <Image
                         resizeMode="contain"
                         style={styles.paymentImg}
-                        source={imgPembayaran}
-                    /> */}
-                    <Text style={styles.selectedPaymentText}>{state.metodePembayaran}</Text>
+                        source={DataPilihPembayaran.imgPembayaran}
+                    />
                     <Button
                         style={{
                             backgroundColor: Parent.colorSecondary,
@@ -133,7 +128,7 @@ const ScreenPurchase = () => {
                 }}
                 labelStyle={styles.purchaseBarActionText}
                 mode="contained"
-                onPress={ () => Alert.alert('Pembayaran berhasil') }
+                onPress={ () => Alert.alert('Pembayaran dengan '+ DataPilihPembayaran.namaPembayaran +' berhasil') }
             >
                 Lanjutkan
             </Button>

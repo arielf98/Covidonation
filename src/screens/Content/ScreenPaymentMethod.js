@@ -13,20 +13,17 @@ import * as Parent from '../../Style/ParentStyle'
 const DataPaymentMethod = [
     {
         id: 1,
-        metodePembayaran: "dana",
         namaPembayaran: "Dana",
     },
     {
         id: 2,
-        metodePembayaran: "ovo",
         namaPembayaran: "OVO",
     },
     {
         id: 3,
-        metodePembayaran: "gopay",
         namaPembayaran: "GO-PAY",
     }
-]
+];
 
 const ScreenPaymentMethod = () => {
 
@@ -42,10 +39,10 @@ const ScreenPaymentMethod = () => {
 
     const [checked, setChecked] = React.useState(state.metodePembayaran);
 
-    function pilihPembayaran(metodePembayaran)
+    function pilihPembayaran(id)
     {
-        setChecked(metodePembayaran);
-        dispatch({ type: 'METODE_PEMBAYARAN', payload: metodePembayaran });
+        setChecked(id);
+        dispatch({ type: 'METODE_PEMBAYARAN', payload: id });
         navigation.goBack()
         dispatch({ type: 'IS_HIDE', payload: true })
     }
@@ -69,13 +66,13 @@ const ScreenPaymentMethod = () => {
             <View style={{padding:10}}>
                 {DataPaymentMethod.map(item => {
                 return (
-                    <TouchableRipple key={item.id} onPress={() => pilihPembayaran(item.metodePembayaran)}>
+                    <TouchableRipple key={item.id} onPress={() => pilihPembayaran(item.id)}>
                         <View>
                             <View style={styles.rowContainer}>
                                 <View style={{marginTop: 8}}>
                                     <RadioButton
-                                    value={item.metodePembayaran}
-                                    status={ checked === item.metodePembayaran ? 'checked' : 'unchecked' }
+                                    value={item.id}
+                                    status={ checked === item.id ? 'checked' : 'unchecked' }
                                     color={Parent.colorBlueMax}
                                     />
                                 </View>

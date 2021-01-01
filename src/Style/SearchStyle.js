@@ -21,6 +21,18 @@ export const styles = StyleSheet.create({
     {
         
     },
+    topBarView2:
+    {
+        backgroundColor: Parent.colorWhite,
+    },
+    topBarIcon2:
+    {
+        color: Parent.colorGreyMin,
+    },
+    topBarText2:
+    {
+        color: Parent.colorGreyMid,
+    },
 
     // Section (Tag, Popular, Newest)
     sectionView:
@@ -47,6 +59,20 @@ export const styles = StyleSheet.create({
         right: 0,
         marginRight: 5,
         marginTop: 7,
+    },
+    sectionMore:
+    {
+        fontSize: Parent.sizeFontMid,
+        color: Parent.colorBlueMax,
+        position: 'absolute',
+        right: 0,
+        marginRight: 5,
+        marginTop: 5,
+    },
+    sectionDivider:
+    {
+        height: 1,
+        backgroundColor: Parent.colorWhite,
     },
 
     // Mini Content
