@@ -35,8 +35,6 @@ export default function KotakKoleksiItem() {
 
     const globalState = useContext(store)
     const {dispatch} = globalState
-
-
     const navigation = useNavigation()
 
     const renderItem = ({ item }) => (
@@ -46,7 +44,8 @@ export default function KotakKoleksiItem() {
            judulKonten = {item.judulKonten }
            namaKreator={ item.namaKreator }
            gambarKonten={item.gambarKonten} 
-            navigasi="ScreenContent" />
+            navigasi="DetailKotakKoleksi"
+            value={{title : item.judulKonten, image: item.gambarKonten, author: item.namaKreator}} />
     )
 
     return (

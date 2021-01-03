@@ -38,17 +38,17 @@ export default function DetailKotakKoleksi({route}) {
 
     const navigation = useNavigation()
     const globalState = useContext(store)
-    const { dispatch } = globalState
-    const { namaKreator, judul, gambarKonten } = route.params
+    const {state, dispatch } = globalState
+    const { author, title, image } = route.params
 
 
     useBackHandler(() => {
-        dispatch({ type: 'IS_HIDE', payload: true })
+        state.isFromMiniContent ?   dispatch({ type: 'IS_HIDE', payload: false }) : 
+                                    dispatch({ type: 'IS_HIDE', payload: true })
         navigation.goBack()
         return true
     })
 
-    
 
     return (
         <View>
@@ -56,7 +56,8 @@ export default function DetailKotakKoleksi({route}) {
               style={{ backgroundColor: Parent.colorBlueMax }} >
                 <Appbar.BackAction onPress={ ()=> {
                     navigation.goBack()
-                    dispatch({ type: 'IS_HIDE', payload: true }) 
+                    state.isFromMiniContent ?   dispatch({ type: 'IS_HIDE', payload: false }) : 
+                                                dispatch({ type: 'IS_HIDE', payload: true })
                     }} />
                 <Title style={{ color: 'white' }} > Kotak Koleksi </Title>
             </Appbar>
@@ -65,18 +66,18 @@ export default function DetailKotakKoleksi({route}) {
                 <Card.Content style={{ marginBottom: 10 }} >
 
                     <Title
-                        style={styles.itemKoleksiTitle} > {judul} </Title>
+                        style={styles.itemKoleksiTitle} > {title} </Title>
                     <Icon
                         style={styles.itemKoleksiIcon}
                         name="user-alt"
                         size={15}
                         color="#999999" />
                     <Text
-                        style={styles.itemKoleksiAuthor} > {namaKreator} </Text>
+                        style={styles.itemKoleksiAuthor} > {author} </Text>
 
                     <Card.Cover style={{ width: 100, height: 100, borderRadius: 20 }}
                             resizeMode='cover'
-                            source={{ uri: gambarKonten }}/>
+                            source={{ uri: image }}/>
                 </Card.Content>
 
                 {/* ------- untuk garis bawah ------ */}

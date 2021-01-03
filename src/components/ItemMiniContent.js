@@ -9,7 +9,7 @@ import { TouchableRipple } from 'react-native-paper';
 import { store } from '../Config/Contex/store'
 
 
-export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten, navigasi}) => {
+export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten, navigasi, value}) => {
 
     const navigation = useNavigation();
 
@@ -17,10 +17,11 @@ export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten, n
     // untuk lebih jelasnya baca tentang context pada react
     const globalState = useContext(store)
     const { dispatch } = globalState
+    // const { author, title, image } = route.params
 
     return (
         <TouchableRipple onPress={() => {
-                navigation.navigate(navigasi)
+                navigation.navigate(navigasi, value)
 
                 // melakukan dispatch pada action IS_HIDE dan IS_FROM_MINI_CONTENT pada component item mini
                 const hide = dispatch({ type: 'IS_HIDE', payload: true })

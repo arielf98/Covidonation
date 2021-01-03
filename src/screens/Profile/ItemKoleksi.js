@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 
 
 
-export default function ItemKoleksi({ namaKreator, judul, gambarKonten, clickable}) {
+export default function ItemKoleksi({ namaKreator, judul, gambarKonten}) {
 
     const navigation = useNavigation()
 
@@ -20,11 +20,10 @@ export default function ItemKoleksi({ namaKreator, judul, gambarKonten, clickabl
                     onPress = {() => {
                         
                         navigation.navigate('DetailKotakKoleksi', {
-                            namaKreator,
-                            judul,
-                            gambarKonten
+                            author  : namaKreator,
+                            title   : judul,
+                            image   : gambarKonten
                         })
-
                     }}
                     rippleColor="rgba(0, 0, 0, .32)">
 
