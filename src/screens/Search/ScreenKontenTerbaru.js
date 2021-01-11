@@ -135,18 +135,13 @@ const DataKontenTerbaru = [
 
 const ScreenKontenTerbaru = () => {
 
-    //mengambil data dari global state 
-    // untuk lebih jelasnya baca tentang context pada react
     const globalState = useContext(store)
     const { dispatch } = globalState
     const navigation = useNavigation();
 
     useBackHandler(()=> {
         navigation.goBack()
-
-        //melakukan dispatch pada action IS_HIDE di komponen item list kontent teratas...
         dispatch({ type: 'IS_HIDE', payload: false })
-        return true
     })
 
     return (
@@ -159,9 +154,7 @@ const ScreenKontenTerbaru = () => {
             <Appbar.Header style={styles.topBarView}>
             <Appbar.BackAction onPress={() => { 
                     navigation.goBack()
-
-                    //melakukan dispatch pada action IS_HIDE di komponen item list kontent teratas...
-                    return dispatch({ type: 'IS_HIDE', payload: false })
+                    dispatch({ type: 'IS_HIDE', payload: false })
                 }}
 
                      style={styles.topBarIcon} />

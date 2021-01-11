@@ -4,7 +4,7 @@ import React, { createContext, useReducer } from 'react'
 const initialState = {
     isBottomNavHide : false,
     isFromMiniContent: false,
-    metodePembayaran: "dana",
+    metodePembayaran: 1,
 }
 
 const store = createContext(initialState)
