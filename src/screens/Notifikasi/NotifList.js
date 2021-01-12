@@ -6,9 +6,6 @@ import { styles } from '../../Style/NotifStyle'
 
 
 
-
-
-
 export default function NotifList() {
     return (
 
@@ -35,8 +32,6 @@ export default function NotifList() {
 
             </View>
         </View>
-
-
 
      <UnderLine/>
 

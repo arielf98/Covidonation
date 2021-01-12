@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "857940618835",
+    "project_id": "covidonation",
+    "storage_bucket": "covidonation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857940618835:android:aa587fef6d53597592a0a6",
+        "android_client_info": {
+          "package_name": "com.covidonation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857940618835-r96fu25mfu2fj63vrtb2p8e9glldb6qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBof4PH2H2klS2Hru5QjQeE7vyN1QtjSIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857940618835-r96fu25mfu2fj63vrtb2p8e9glldb6qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

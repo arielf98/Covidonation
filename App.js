@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { HomeScreen} from './src/screens/Home/Home'
 import { ScreenSearch } from './src/screens/Search'
 import { BottomNavigation, Text } from 'react-native-paper';
@@ -7,7 +7,6 @@ import { store } from './src/Config/Contex/store'
 import Profile from './src/screens/Profile/Profile';
 import * as Parent from './src/Style/ParentStyle'
 
-const ProfileRoute = () => <Text>Profile</Text>;
 
 
 export default function App() {
@@ -33,8 +32,6 @@ export default function App() {
       notification: Notif,
       profile: Profile,
     })
-
-
 
 
   return (
