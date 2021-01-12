@@ -15,10 +15,10 @@ export default function SettingCard({icon, nama, handler}) {
                 <TouchableRipple
                     onPress={() => { 
 
-                        if(typeof handler === 'function'){
-                            handler() 
-                        } else {
+                        if (typeof handler == 'undefined'){
                             console.log('Pressed')
+                        } else {
+                            handler() 
                         } 
                     }}
 

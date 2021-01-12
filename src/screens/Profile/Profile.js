@@ -64,7 +64,7 @@ export function ProfileRoute() {
                             <SettingCard
                                 icon="sign-out-alt"
                                 nama="Keluar"
-                                handler={handleLogOut}
+                                handler={() => handleLogOut() }
                                 />
                         </View>
 
