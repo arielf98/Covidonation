@@ -9,10 +9,18 @@ import ListKotakKoleksi from './ListKotakKoleksi'
 import { ScreenContent, ScreenPurchase, ScreenPaymentMethod } from '../Content'
 import { store } from '../../Config/Contex/store'
 import DetailKotakKoleksi from './DetailKotakKoleksi'
+import auth from '@react-native-firebase/auth';
+
 
 
 
 export function ProfileRoute() {
+
+    const  handleLogOut = () => {
+        auth()
+            .signOut()
+            .then(() => console.log('User signed out!'));
+    }
 
 
     return (
@@ -49,11 +57,16 @@ export function ProfileRoute() {
 
                     {/* Keluar */}
                     {/* --------------------------------------------------------------------------------------- */}
-                    <View style={{ marginTop: 20, marginBottom: 20 }} >
-                        <SettingCard
-                            icon="sign-out-alt"
-                            nama="Keluar" />
-                    </View>
+                    
+                    
+                        <View style={{ marginTop: 20, marginBottom: 20 }} >
+                            
+                            <SettingCard
+                                icon="sign-out-alt"
+                                nama="Keluar"
+                                handler={handleLogOut}
+                                />
+                        </View>
 
                 </View>
             </ScrollView>

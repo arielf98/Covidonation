@@ -16,7 +16,7 @@ const Overview = () => {
                     <View style={styles.viewDalam}>
                         <Image
                             style={styles.logo}
-                            source={require('./src/img/logoCovidonation/logo_a.png')} />
+                            source={require('../../img/logoCovidonation/logo_a.png')} />
                     </View>
 
 
@@ -36,7 +36,7 @@ const Overview = () => {
 
 }
 
-export default App
+export default Overview
 
 const styles = StyleSheet.create({
     judulHalaman: {

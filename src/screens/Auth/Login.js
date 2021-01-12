@@ -2,10 +2,34 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/AntDesign'
+import { useNavigation } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import SignUp from './SignUp'
+import { NavigationContainer } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth'
 
-const Login = () => {
+
+export const Login = () => {
     const [text, setText] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigation = useNavigation()
+
+
+    const handleLogin = () => {
+
+        auth()
+            .signInWithEmailAndPassword(text,password)
+            .then(() => {
+                console.log('User signed in!');
+            })
+            .catch(error => {
+        
+                console.error(error);
+            });
+    }
+
+
     return (
 
         <View style={styles.viewHalaman}>
@@ -13,7 +37,7 @@ const Login = () => {
             <View style={styles.viewDalam}>
                 <Image
                     style={styles.logo}
-                    source={require('./src/img/logoCovidonation/logo_a.png')} />
+                    source={require('../../img/logoCovidonation/logo_a.png')} />
             </View>
 
             <View style={styles.email}>
@@ -34,12 +58,18 @@ const Login = () => {
             <Text style={styles.password}>Forgot Password?
     </Text>
 
-            <Button style={styles.button} color='blue' mode="contained" onPress={() => console.log('Pressed')}>
+            <Button style={styles.button} 
+                color='blue' 
+                mode="contained" 
+                onPress={() => handleLogin()}>
                 LOGIN
   </Button>
 
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 200 }}>
-                <Text style={styles.akhir}>Don't have an account? <Text style={styles.tulisan}>Sign Up</Text>
+                <Text style={styles.akhir}>Don't have an account? 
+                <Text
+                    onPress={ ()=> navigation.navigate('SignUp') } 
+                    style={styles.tulisan}>Sign Up</Text>
                 </Text>
 
             </View>
@@ -47,7 +77,23 @@ const Login = () => {
     );
 }
 
-export default App
+
+
+const Stack = createStackNavigator();
+
+export default function MyRoute(){
+    return(
+        <NavigationContainer>
+            <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{ headerShown : false }} >
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Login" component={Login} />
+            </Stack.Navigator>
+        </NavigationContainer>
+
+    )
+}
 
 const styles = StyleSheet.create({
     judulHalaman: {

@@ -18,7 +18,7 @@ export default HeaderLists = () => {
             <Card style={styles.containerCard}
                 onPress={() => Alert.alert('Total Donasi Di Klik')}>
                 <Card.Content style={styles.cardContentContainer}>
-                    <Paragraph style={styles.containerTextStyle} > Total Donasi : </Paragraph>
+                    <Paragraph style={styles.containerTextStyle} > Total Donasi  : </Paragraph>
                     <Paragraph style={styles.containerTextStyle2} > Rp. 123.000.000 </Paragraph>
                 </Card.Content>
 

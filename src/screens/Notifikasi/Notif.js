@@ -1,12 +1,14 @@
-import React from 'react'
-import { View, Text, Platform, Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Platform, Alert,} from 'react-native'
 import { Appbar } from 'react-native-paper'
 import { styles } from '../../Style/NotifStyle'
 import NotifList from './NotifList'
 
 
 
+
 export default function Notif() {
+
 
 
     return (
@@ -24,6 +26,8 @@ export default function Notif() {
 
             <NotifList/>
             <NotifList/>
+
+             
         </View>
     )
 }
