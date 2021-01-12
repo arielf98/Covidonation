@@ -1,52 +1,72 @@
-import React, { useContext } from 'react'
-import { Text, View, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import React, { useContext, useEffect, useState } from 'react'
+import * as Parent from '../Style/ParentStyle'
 import { styles } from '../Style/SearchStyle'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-import { TouchableRipple } from 'react-native-paper';
+
+import { Text, View, Image } from 'react-native'
+import { TouchableRipple } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+
 import { store } from '../Config/Contex/store'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
 
+import { utils } from '@react-native-firebase/app'
+import storage from '@react-native-firebase/storage'
 
-export default ItemMiniContent = ({id, judulKonten, namaKreator, gambarKonten, navigasi, value}) => {
+export default ItemMiniContent = ({id, title, authorName, thumbnail, navigasi}) => {
 
-    const navigation = useNavigation();
-
-      //mengambil data dari global state 
-    // untuk lebih jelasnya baca tentang context pada react
     const globalState = useContext(store)
-    const { dispatch } = globalState
-    // const { author, title, image } = route.params
+    const {state, dispatch} = globalState
+    const navigation = useNavigation()
+
+    const [urlImg, setUrlImg] = useState('https://firebasestorage.googleapis.com/v0/b/covidonation.appspot.com/o/contents%2Fthumbnail%2Fdefault.png?alt=media&token=9cb3ed3a-84b8-4b20-a843-a325582c00f2');
+
+    useEffect( () => {
+        async function getUrlImg ()
+        {
+            const data = await storage()
+                .ref('contents/thumbnail/' + thumbnail)
+                .getDownloadURL();
+
+            // console.log("URL IMG: " + data)
+
+            setUrlImg(data)
+        }
+
+        getUrlImg()
+    }, []);
 
     return (
         <TouchableRipple onPress={() => {
-                navigation.navigate(navigasi, value)
+            dispatch({ type: 'SELECTED_CONTENT_ID', payload: id || '1' })
+            navigation.navigate(navigasi)
 
-                // melakukan dispatch pada action IS_HIDE dan IS_FROM_MINI_CONTENT pada component item mini
-                const hide = dispatch({ type: 'IS_HIDE', payload: true })
-                const minicontent = dispatch({ type: 'IS_FROM_MINI_CONTENT', payload: true })
-
-                return hide, minicontent
-            }} >
+            dispatch({ type: 'IS_HIDE', payload: true })
+            dispatch({ type: 'IS_FROM_MINI_CONTENT', payload: true })
+        }}
+        
+        rippleColor = {Parent.colorRipple}
+        >
+            
             <View style={styles.miniContentView}>
             
                 <Image
                 style={styles.miniContentImg}
                 resizeMode="cover"
-                // source={require('../img/klee.jpg')}
-                source={{ uri: gambarKonten }}
+                source={{ uri: urlImg }}
+                // source={{ uri: thumbnail }}
                 />
                 
                 <Text style={styles.miniContentTitle}>
-                    {judulKonten.length > 20 ? `${judulKonten.substring(0, 20)}...` : judulKonten }
+                    {title.length > 20 ? `${title.substring(0, 20)}...` : title }
                 </Text>
 
                 <View style={styles.rowContainer}>
                     
                     <Icon name="user-alt" style={styles.miniContentIcon}/>
                     <Text style={styles.miniContentAuthor}>
-                        {namaKreator.length > 20 ? `${namaKreator.substring(0, 20)}...` : namaKreator }
+                        {authorName.length > 20 ? `$authorName.substring(0, 20)}...` : authorName }
                     </Text>
                 </View>
             

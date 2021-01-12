@@ -5,6 +5,7 @@ import SectionTag from './SectionTag'
 import SectionPopular from './SectionPopular'
 import SectionNewest from './SectionNewest'
 import ContainerTabPopular from './ContainerTabPopular'
+import ScreenResult from './ScreenResult'
 
 export {
     ScreenSearch,
@@ -14,4 +15,5 @@ export {
     SectionPopular,
     SectionNewest,
     ContainerTabPopular,
+    ScreenResult,
 };

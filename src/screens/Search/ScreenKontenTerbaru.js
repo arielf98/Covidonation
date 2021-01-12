@@ -1,183 +1,107 @@
-import React, {useContext} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import * as Parent from '../../Style/ParentStyle'
+
 import { View, ScrollView } from 'react-native'
 import { Appbar } from 'react-native-paper';
-import { styles } from '../../Style/SearchStyle'
-import * as Parent from '../../Style/ParentStyle'
-import { ItemCardContent } from '../../components'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { ItemLoader, ItemCardContent } from '../../components'
+
 import { store } from '../../Config/Contex/store'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
 import { useBackHandler } from '@react-native-community/hooks'
 
-const DataKontenTerbaru = [
-    {  
-        id: 1,
-        judulKonten: "Dynamite",
-        namaKreator: "BTS",
-        hargaKonten: "Rp 120.000",
-        gambarKonten: "https://picsum.photos/600",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 2,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/800",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 3,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/700",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 4,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/900",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 5,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/500",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-];
+import database from '@react-native-firebase/database'
 
 const ScreenKontenTerbaru = () => {
 
     const globalState = useContext(store)
     const { dispatch } = globalState
-    const navigation = useNavigation();
+    const navigation = useNavigation()
+
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
 
     useBackHandler(()=> {
         navigation.goBack()
         dispatch({ type: 'IS_HIDE', payload: false })
     })
 
-    return (
-        <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        style={{backgroundColor: Parent.colorWhite2}}
-        >
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
 
-            <Appbar.Header style={styles.topBarView}>
-            <Appbar.BackAction onPress={() => { 
+    if (isLoading)
+    {
+        return (
+            <View style={{
+                flex: 1, 
+                alignItems: 'center',
+                justifyContent: 'center', 
+                backgroundColor: Parent.colorWhite
+            }}>
+                <ItemLoader />
+            </View>
+        );
+    }
+
+    return (
+    <View style={{flex: 1}}>
+
+        <View style={Parent.styles.headerView}>
+            <Appbar.Header style={Parent.styles.headerBody}>
+                <Appbar.BackAction onPress={() => { 
                     navigation.goBack()
                     dispatch({ type: 'IS_HIDE', payload: false })
                 }}
-
-                     style={styles.topBarIcon} />
-                <Appbar.Content title="Konten Terbaru"  style={styles.topBarText} />
+                style={Parent.styles.headerIcon} />
+                <Appbar.Content title="Konten Terbaru" style={Parent.styles.headerText} />
             </Appbar.Header>
+        </View>
+
+        <ScrollView
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={true}
+        style={{backgroundColor: Parent.colorWhite2}}
+        >
+
+            <View style={Parent.styles.headerMargin}/>
 
             <View>
-                {DataKontenTerbaru.map(prop => {
-                return (
-                    <ItemCardContent
-                    key={prop.id}
-                    id={prop.id}
-                    judulKonten={prop.judulKonten}
-                    namaKreator={prop.namaKreator}
-                    hargaKonten={prop.hargaKonten}
-                    gambarKonten={prop.gambarKonten}
-                    tag={prop.tag}
-                    />
-                );
+                {dataContent.map(item => {
+
+                    if (item == null)
+                    {
+                        console.log("NULL content skipped (ScreenKontenTerbaru)")
+                    }
+                    else
+                    {
+                        return (
+                            <ItemCardContent
+                            key={item.id || '1'}
+                            id={item.id || '1'}
+                            title={item.title || 'Title'}
+                            authorName={item.author.name || 'Author name'}
+                            priceTotal={item.price.total || 'Total price'}
+                            thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                            tag={item.tag}
+                            navigasi="ScreenContent"
+                            />
+                        );
+                    }
                 })}
             </View>
 
         </ScrollView>
+
+    </View>
     )
 }
 

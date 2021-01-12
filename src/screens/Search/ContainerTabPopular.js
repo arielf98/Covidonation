@@ -1,315 +1,181 @@
-import React from 'react'
-import { View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { ItemCardContent } from '../../components'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React, { useContext, useEffect, useState } from 'react'
 import * as Parent from '../../Style/ParentStyle'
 
-const DataTabHarian = [
-    {  
-        id: 1,
-        judulKonten: "Dynamite",
-        namaKreator: "BTS",
-        hargaKonten: "Rp 120.000",
-        gambarKonten: "https://picsum.photos/500",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 2,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/600",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 3,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/700",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-];
+import { View } from 'react-native'
+import { ItemLoader, ItemCardContent } from '../../components'
 
-const DataTabMingguan = [
-    {  
-        id: 1,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/800",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 2,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/900",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 3,
-        judulKonten: "Dynamite",
-        namaKreator: "BTS",
-        hargaKonten: "Rp 120.000",
-        gambarKonten: "https://picsum.photos/500",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 4,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/600",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 5,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/700",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-];
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
-const DataTabBulanan = [
-    {  
-        id: 1,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        hargaKonten: "Gratis",
-        gambarKonten: "https://picsum.photos/900",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-    {  
-        id: 2,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        hargaKonten: "Rp 35.000",
-        gambarKonten: "https://picsum.photos/800",
-        tag: [
-            {
-                id: 1,
-                teks: "Mencuci",
-                warna: "#65D661",
-            },
-            {
-                id: 2,
-                teks: "JalanNinja",
-                warna: "#8455C2",
-            },
-            {
-                id: 3,
-                teks: "Anjay",
-                warna: "#FFB97D",
-            }
-        ],
-    },
-];
+import database from '@react-native-firebase/database'
 
 function TabHarian() {
+
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    if (isLoading)
+    {
+        return (
+            <View style={{
+                flex: 1, 
+                alignItems: 'center',
+                justifyContent: 'center', 
+                backgroundColor: Parent.colorWhite
+            }}>
+                <ItemLoader />
+            </View>
+        );
+    }
+
     return (
         <View style={{backgroundColor: Parent.colorWhite2}}>
-            {DataTabHarian.map(prop => {
-            return (
-                <ItemCardContent
-                key={prop.id}
-                id={prop.id}
-                judulKonten={prop.judulKonten}
-                namaKreator={prop.namaKreator}
-                hargaKonten={prop.hargaKonten}
-                gambarKonten={prop.gambarKonten}
-                tag={prop.tag}
-                />
-            );
+            {dataContent.map(item => {
+                if (item == null)
+                {
+                    console.log("NULL content skipped (TabHarian)")
+                }
+                else
+                {
+                    return (
+                        <ItemCardContent
+                        key={item.id || '1'}
+                        id={item.id || '1'}
+                        title={item.title || 'Title'}
+                        authorName={item.author.name || 'Author name'}
+                        priceTotal={item.price.total || 'Total price'}
+                        thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                        tag={item.tag}
+                        navigasi="ScreenContent"
+                        />
+                    );
+                }
             })}
         </View>
     );
-  }
-  
+}
+
 function TabMingguan() {
+
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    if (isLoading)
+    {
+        return (
+            <View style={{
+                flex: 1, 
+                alignItems: 'center',
+                justifyContent: 'center', 
+                backgroundColor: Parent.colorWhite
+            }}>
+                <ItemLoader />
+            </View>
+        );
+    }
+
     return (
         <View style={{backgroundColor: Parent.colorWhite2}}>
-            {DataTabMingguan.map(prop => {
-            return (
-                <ItemCardContent
-                key={prop.id}
-                id={prop.id}
-                judulKonten={prop.judulKonten}
-                namaKreator={prop.namaKreator}
-                hargaKonten={prop.hargaKonten}
-                gambarKonten={prop.gambarKonten}
-                tag={prop.tag}
-                />
-            );
+            {dataContent.map(item => {
+                if (item == null)
+                {
+                    console.log("NULL content skipped (TabHarian)")
+                }
+                else
+                {
+                    return (
+                        <ItemCardContent
+                        key={item.id || '1'}
+                        id={item.id || '1'}
+                        title={item.title || 'Title'}
+                        authorName={item.author.name || 'Author name'}
+                        priceTotal={item.price.total || 'Total price'}
+                        thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                        tag={item.tag}
+                        navigasi="ScreenContent"
+                        />
+                    );
+                }
             })}
         </View>
     );
 }
 
 function TabBulanan() {
+
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    if (isLoading)
+    {
+        return (
+            <View style={{
+                flex: 1, 
+                alignItems: 'center',
+                justifyContent: 'center', 
+                backgroundColor: Parent.colorWhite
+            }}>
+                <ItemLoader />
+            </View>
+        );
+    }
+
     return (
         <View style={{backgroundColor: Parent.colorWhite2}}>
-            {DataTabBulanan.map(prop => {
-            return (
-                <ItemCardContent
-                key={prop.id}
-                id={prop.id}
-                judulKonten={prop.judulKonten}
-                namaKreator={prop.namaKreator}
-                hargaKonten={prop.hargaKonten}
-                gambarKonten={prop.gambarKonten}
-                tag={prop.tag}
-                />
-            );
+            {dataContent.map(item => {
+                if (item == null)
+                {
+                    console.log("NULL content skipped (TabHarian)")
+                }
+                else
+                {
+                    return (
+                        <ItemCardContent
+                        key={item.id || '1'}
+                        id={item.id || '1'}
+                        title={item.title || 'Title'}
+                        authorName={item.author.name || 'Author name'}
+                        priceTotal={item.price.total || 'Total price'}
+                        thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                        tag={item.tag}
+                        navigasi="ScreenContent"
+                        />
+                    );
+                }
             })}
         </View>
     );
@@ -318,7 +184,6 @@ function TabBulanan() {
 const Tab = createMaterialTopTabNavigator();
 
 const ContainerTabPopular = () => {
-
     return (
       <Tab.Navigator>
         <Tab.Screen name="Harian" component={TabHarian} />

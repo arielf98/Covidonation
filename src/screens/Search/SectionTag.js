@@ -40,11 +40,10 @@ const SectionTag = () => {
         <View style={{
             flexDirection: 'row',
             flexWrap: 'wrap',
-            paddingHorizontal: 10,
         }}>
-            {DataSectionTag.map(prop => {
+            {DataSectionTag.map(item => {
                 return (
-                    <ItemTag key={prop.id} warna={prop.warna} teks={prop.teks} />
+                    <ItemTag key={item.id} warna={item.warna} teks={item.teks} />
                 );
             })}
         </View>

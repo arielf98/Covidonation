@@ -8,32 +8,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row'
     },
 
-    // Top Bar
-    topBarView:
-    {
-        backgroundColor: Parent.colorWhite,
-    },
-    topBarIcon:
-    {
-        color: Parent.colorGreyMin,
-    },
-    topBarText:
-    {
-        color: Parent.colorGreyMid,
-    },
-    topBarView2:
-    {
-        backgroundColor: Parent.colorBlueMax,
-    },
-    topBarIcon2:
-    {
-        
-    },
-    topBarText2:
-    {
-        
-    },
-
     // Top Carousel
     previewImg:
     {

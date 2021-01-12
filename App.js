@@ -7,8 +7,6 @@ import { store } from './src/Config/Contex/store'
 import Profile from './src/screens/Profile/Profile';
 import * as Parent from './src/Style/ParentStyle'
 
-
-
 export default function App() {
 
   const globalState = useContext(store)

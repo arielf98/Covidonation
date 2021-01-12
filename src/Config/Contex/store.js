@@ -1,10 +1,11 @@
 import React, { createContext, useReducer } from 'react'
 
-
 const initialState = {
     isBottomNavHide : false,
     isFromMiniContent: false,
     metodePembayaran: 1,
+    searchText: '',
+    selectedContentId: '1',
 }
 
 const store = createContext(initialState)
@@ -20,6 +21,10 @@ const StateProvider = ({ children }) => {
                 return { ...state, isFromMiniContent : action.payload }
             case 'METODE_PEMBAYARAN':
                 return { ...state, metodePembayaran : action.payload }
+            case 'SEARCH_TEXT':
+                return { ...state, searchText : action.payload }
+            case 'SELECTED_CONTENT_ID':
+                return { ...state, selectedContentId : action.payload }
             default:
                 throw new Error();
         };

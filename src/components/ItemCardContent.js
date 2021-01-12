@@ -1,34 +1,53 @@
-import React,{useContext} from 'react'
-import { Text, View, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React, { useContext, useState, useEffect } from 'react'
+import * as Parent from '../Style/ParentStyle'
 import { styles } from '../Style/SearchStyle'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-import { ItemTag } from '../components'
-import { TouchableRipple } from 'react-native-paper';
+
+import { Text, View, Image } from 'react-native'
+import { TouchableRipple } from 'react-native-paper'
 import { Card } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { ItemTag } from '../components'
+
 import { store } from '../Config/Contex/store'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
 
-export default ItemCardContent = ({id, judulKonten, namaKreator, hargaKonten, gambarKonten, tag}) => {
+import { utils } from '@react-native-firebase/app'
+import storage from '@react-native-firebase/storage'
 
-    const navigation = useNavigation();
+export default ItemCardContent = ({id, title, authorName, priceTotal, thumbnail, tag, navigasi}) => {
 
-    //mengambil data dari global state 
-    // untuk lebih jelasnya baca tentang context pada react
     const globalState = useContext(store)
-    const { state, dispatch } = globalState
+    const {state, dispatch} = globalState
+    const navigation = useNavigation()
+
+    const [urlImg, setUrlImg] = useState('https://firebasestorage.googleapis.com/v0/b/covidonation.appspot.com/o/contents%2Fthumbnail%2Fdefault.png?alt=media&token=9cb3ed3a-84b8-4b20-a843-a325582c00f2');
+
+    useEffect( () => {
+        async function getUrlImg ()
+        {
+            const data = await storage()
+                .ref('contents/thumbnail/' + thumbnail)
+                .getDownloadURL();
+
+            setUrlImg(data)
+        }
+        getUrlImg()
+    }, []);
 
     return (
         <TouchableRipple onPress={() => {
-            navigation.navigate('ScreenContent')
+            dispatch({ type: 'SELECTED_CONTENT_ID', payload: id || '1' })
+            navigation.navigate(navigasi)
 
-            //apakah card d klik dari mini card ? jika true akan menjalankan logic yang pertama dan sebaliknya...
-            const hide = state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) : null
-            const minicontent = dispatch({ type: 'IS_FROM_MINI_CONTENT', payload: false })
-            return hide, minicontent
+            state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) : null
+            dispatch({ type: 'IS_FROM_MINI_CONTENT', payload: false })
         }}
-         style={styles.touchableView}>
+        
+        rippleColor = {Parent.colorRipple}
+        >
+
             <Card containerStyle={styles.cardWrapper}>
             
                 <View style={styles.cardContentView}>
@@ -37,27 +56,27 @@ export default ItemCardContent = ({id, judulKonten, namaKreator, hargaKonten, ga
                         <Image
                         style={styles.cardContentImg}
                         resizeMode="cover"
-                        source={{ uri: gambarKonten }}
+                        source={{ uri: urlImg }}
                         />
                     </View>
 
                     <View style={styles.cardContentDetailView}>
 
                         <Text style={styles.cardContentTitle}>
-                            {judulKonten.length > 30 ? `${judulKonten.substring(0, 30)}...` : judulKonten }
+                            {title.length > 30 ? `${title.substring(0, 30)}...` : title }
                         </Text>
 
                         <View style={styles.cardContentTextView}>
                             <Icon name="person" style={styles.cardContentIcon}/>
                             <Text style={styles.cardContentText}>
-                                {namaKreator.length > 30 ? `${namaKreator.substring(0, 30)}...` : namaKreator }
+                                {authorName.length > 30 ? `${authorName.substring(0, 30)}...` : authorName }
                             </Text>
                         </View>
 
                         <View style={styles.cardContentTextView}>
                             <Icon name="pricetag" style={styles.cardContentIcon}/>
                             <Text style={styles.cardContentText}>
-                                {hargaKonten}
+                                {priceTotal}
                             </Text>
                         </View>
 
@@ -67,20 +86,22 @@ export default ItemCardContent = ({id, judulKonten, namaKreator, hargaKonten, ga
                 
 
                 <View style={styles.cardContentTagView}>
-                    {tag.map(prop => {
-                        return (
-                            <ItemTag
-                                key={prop.id}
-                                warna={prop.warna}
-                                teks={prop.teks}
-                                marginBottom={0}
-                            />
-                        );
+                    {tag.map(item => {
+                        if (item == null)
+                        {
+                            console.log("NULL tag skipped (ItemCardContent)")
+                        }
+                        else
+                        {
+                            return (
+                                <ItemTag key={item.name} warna={item.color} teks={item.name}/>
+                            );
+                        }
                     })}
                 </View>
 
             </Card>
+
         </TouchableRipple>
-        
     )
 }

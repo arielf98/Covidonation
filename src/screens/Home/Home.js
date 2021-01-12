@@ -107,7 +107,7 @@ const DATA = [
 export function HomeScreen() {
     return (
         <SafeAreaView style={styles.containerSafeArea}>
-            <SectionList 
+            {/* <SectionList 
                 sections={DATA}
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <ListItems  // setiap item yang ada di list ada di component ListItems
@@ -120,7 +120,7 @@ export function HomeScreen() {
                                             
                                             // component header list berisikan component carousel dan logo covidonation
                 renderSectionHeader={() => <HeaderLists/> }
-            />
+            /> */}
 
         </SafeAreaView>
 

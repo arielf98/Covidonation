@@ -1,49 +1,60 @@
-import React from 'react'
-import { ScrollView } from 'react-native'
-import { ItemMiniContent } from '../../components'
+import React, { useEffect, useState } from 'react'
 
-const DataSectionPopular = [
-    {  
-        id: 1,
-        judulKonten: "Rolling in The Deep",
-        namaKreator: "Adele",
-        gambarKonten: "https://picsum.photos/900",
-    },
-    {  
-        id: 2,
-        judulKonten: "Kangen",
-        namaKreator: "Dewa 19",
-        gambarKonten: "https://picsum.photos/800",
-    },
-    {  
-        id: 3,
-        judulKonten: "Dynamite",
-        namaKreator: "BTS",
-        gambarKonten: "https://picsum.photos/500",
-    },
-];
+import { ScrollView } from 'react-native'
+import { ItemLoader, ItemMiniContent } from '../../components'
+
+import database from '@react-native-firebase/database'
 
 const SectionPopular = () => {
+
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+    
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    // console.log(dataContent)
 
     return (
         <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         alwaysBounceHorizontal={true}
-        style={{marginLeft:10}}
         >
-            {DataSectionPopular.map(prop => {
-                return (
-                    <ItemMiniContent
-                    key={prop.id}
-                    id={prop.id}
-                    judulKonten={prop.judulKonten}
-                    namaKreator={prop.namaKreator}
-                    gambarKonten={prop.gambarKonten}
-                    navigasi="ScreenContent"
-                    />
-                );
-            })}
+
+            {isLoading ? <ItemLoader /> : 
+            (
+                dataContent.map(item => {
+
+                    if (item == null)
+                    {
+                        console.log("NULL content skipped (SectionPopular)")
+                    }
+                    else
+                    {
+                        return (
+                            <ItemMiniContent
+                            key={item.id || '1'}
+                            id={item.id || '1'}
+                            title={item.title || 'Title'}
+                            authorName={item.author.name || 'Author name'}
+                            thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                            navigasi="ScreenContent"
+                            />
+                        );
+                    }
+
+                })
+            )}
+
         </ScrollView>
     )
 }

@@ -1,14 +1,17 @@
-import React, {useContext, useEffect} from 'react'
-import { View, ScrollView, Text, Image, Alert, Dimensions } from 'react-native'
-import { Appbar } from 'react-native-paper';
-import { styles } from '../../Style/ContentStyle'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
-import { DataTable, Button } from 'react-native-paper';
-import { store } from '../../Config/Contex/store'
-import { useBackHandler } from '@react-native-community/hooks'
+import React, { useEffect, useState, useContext } from 'react'
 import * as Parent from '../../Style/ParentStyle'
+import { styles } from '../../Style/ContentStyle'
+
+import { View, ScrollView, Text, Image, Alert, Dimensions } from 'react-native'
+import { Appbar, DataTable, Button } from 'react-native-paper'
+import { ItemLoader } from '../../components'
+
+import database from '@react-native-firebase/database'
+import { store } from '../../Config/Contex/store'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
+import { useBackHandler } from '@react-native-community/hooks'
 
 const DataPaymentMethod = [
     {
@@ -28,57 +31,85 @@ const DataPaymentMethod = [
     }
 ];
 
-const DataPurchase = 
-{
-    untukDonasi: "Rp 170.000",
-    untukKreator: "Rp 30.000",
-    totalBayar: "Rp 200.000",
-}
-
 const ScreenPurchase = () => {
 
     const globalState = useContext(store)
     const {state, dispatch} = globalState
     const navigation = useNavigation()
 
-    const DataPilihPembayaran = DataPaymentMethod[state.metodePembayaran-1]
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
 
     useBackHandler(()=> {
         navigation.goBack()
         dispatch({ type: 'IS_HIDE', payload: true })
-        return true
     })
+
+    const DataPilihPembayaran = DataPaymentMethod[state.metodePembayaran-1]
+
+    useEffect(() => {
+        database()
+            .ref('/contents/' + state.selectedContentId)
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    // console.log("Content Id: " + state.selectedContentId)
+    // console.log(dataContent.price)
+
+    if (isLoading)
+    {
+        return (
+            <View style={{
+                flex: 1, 
+                alignItems: 'center',
+                justifyContent: 'center', 
+                backgroundColor: Parent.colorWhite
+            }}>
+                <ItemLoader />
+            </View>
+        );
+    }
     
     return (
     <View style={{flex: 1}}>
+        {/* <Text>Cek terminal gan...</Text> */}
+        <View style={Parent.styles.headerView}>
+            <Appbar.Header style={Parent.styles.headerBody}>
+                <Appbar.BackAction onPress={() => { 
+                    navigation.goBack()
+                    dispatch({ type: 'IS_HIDE', payload: true })
+                }}
+                style={Parent.styles.headerIcon} />
+                <Appbar.Content title="Pembelian Konten" style={Parent.styles.headerText} />
+            </Appbar.Header>
+        </View>
+
         <ScrollView
         showsVerticalScrollIndicator={false}
         style={{backgroundColor:'white'}}
         >
 
-            <Appbar.Header style={styles.topBarView2}>
-            <Appbar.BackAction onPress={() => { 
-                    navigation.goBack()
-                    dispatch({ type: 'IS_HIDE', payload: true })
-                }}
-                style={styles.topBarIcon2} />
-                <Appbar.Content title="Pembelian Konten" style={styles.topBarText2} />
-            </Appbar.Header>
+            <View style={Parent.styles.headerMargin}/>
 
             <View style={{padding:10}}>
                 <Text style={styles.sectionTitle}>Rincian Pembayaran</Text>
                 <DataTable>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textDef}>Untuk donasi</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={styles.textDef}>{DataPurchase.untukDonasi}</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={styles.textDef}>{dataContent.price.total - dataContent.price.forAuthor}</Text></DataTable.Cell>
                     </DataTable.Row>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textDef}>Untuk kreator</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={styles.textDef}>{DataPurchase.untukKreator}</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={styles.textDef}>{dataContent.price.forAuthor}</Text></DataTable.Cell>
                     </DataTable.Row>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textBold}>Total</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={styles.textBold}>{DataPurchase.totalBayar}</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={styles.textBold}>{dataContent.price.total}</Text></DataTable.Cell>
                     </DataTable.Row>
                 </DataTable>
             </View>
@@ -109,7 +140,7 @@ const ScreenPurchase = () => {
 
             </View>
 
-            <View style={{height:60}}/>
+            <View style={{height:100}}/>
 
         </ScrollView>
 
@@ -122,6 +153,7 @@ const ScreenPurchase = () => {
                 style={{
                     backgroundColor: Parent.colorBlueMax,
                     position: 'absolute',
+                    zIndex: 2,
                     bottom: 0,
                     marginBottom: 10,
                     width: (Dimensions.get('window').width)-(Dimensions.get('window').width*0.075)

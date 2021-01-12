@@ -1,48 +1,60 @@
-import React from 'react'
-import { ScrollView } from 'react-native'
-import { ItemMiniContent } from '../../components'
+import React, { useEffect, useState } from 'react'
 
-const DataSectionNewest = [
-    {  
-        id: 1,
-        judulKonten: "Too Much to Ask",
-        namaKreator: "Niall Horan",
-        gambarKonten: "https://picsum.photos/600",
-    },
-    {  
-        id: 2,
-        judulKonten: "Again",
-        namaKreator: "YUI",
-        gambarKonten: "https://picsum.photos/700",
-    },
-    {  
-        id: 3,
-        judulKonten: "Stuck with U",
-        namaKreator: "Ariana Grande & Justin Bieber",
-        gambarKonten: "https://picsum.photos/800",
-    },
-];
+import { ScrollView } from 'react-native'
+import { ItemLoader, ItemMiniContent } from '../../components'
+
+import database from '@react-native-firebase/database'
 
 const SectionNewest = () => {
+    
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+    
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    // console.log(dataContent)
+
     return (
         <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         alwaysBounceHorizontal={true}
-        style={{marginLeft:10}}
         >
-            {DataSectionNewest.map(prop => {
-                return (
-                    <ItemMiniContent
-                    key={prop.id}
-                    id={prop.id}
-                    judulKonten={prop.judulKonten}
-                    namaKreator={prop.namaKreator}
-                    gambarKonten={prop.gambarKonten}
-                    navigasi="ScreenContent"
-                    />
-                );
-            })}
+
+            {isLoading ? <ItemLoader /> : 
+            (
+                dataContent.map(item => {
+
+                    if (item == null)
+                    {
+                        console.log("NULL content skipped (SectionNewest)")
+                    }
+                    else
+                    {
+                        return (
+                            <ItemMiniContent
+                            key={item.id || '1'}
+                            id={item.id || '1'}
+                            title={item.title || 'Title'}
+                            authorName={item.author.name || 'Author name'}
+                            thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                            navigasi="ScreenContent"
+                            />
+                        );
+                    }
+
+                })
+            )}
+
         </ScrollView>
     )
 }

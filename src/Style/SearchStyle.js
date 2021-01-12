@@ -8,32 +8,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row'
     },
 
-    // Top Bar
-    topBarView:
-    {
-        backgroundColor: Parent.colorBlueMax,
-    },
-    topBarIcon:
-    {
-        
-    },
-    topBarText:
-    {
-        
-    },
-    topBarView2:
-    {
-        backgroundColor: Parent.colorWhite,
-    },
-    topBarIcon2:
-    {
-        color: Parent.colorGreyMin,
-    },
-    topBarText2:
-    {
-        color: Parent.colorGreyMid,
-    },
-
     // Section (Tag, Popular, Newest)
     sectionView:
     {
@@ -41,7 +15,6 @@ export const styles = StyleSheet.create({
     },
     sectionHeader:
     {
-        marginHorizontal:10,
         marginTop: 5,
         marginBottom: 15,
     },
@@ -66,7 +39,7 @@ export const styles = StyleSheet.create({
         color: Parent.colorBlueMax,
         position: 'absolute',
         right: 0,
-        marginRight: 5,
+        marginRight: 0,
         marginTop: 5,
     },
     sectionDivider:
@@ -111,13 +84,13 @@ export const styles = StyleSheet.create({
     // Search Bar
     searchBarView:
     {
-        backgroundColor: Parent.colorBlueMin,
+        backgroundColor: Parent.colorWhite2,
         borderRadius: 10,
     },
     searchBarText:
     {
         color: Parent.colorGreyMid,
-        fontSize: Parent.sizeFontMid,
+        fontSize: Parent.sizeFontMid+2,
     },
 
     // Card Content
@@ -134,8 +107,8 @@ export const styles = StyleSheet.create({
     },
     cardContentImg:
     {
-        width: 85,
-        height: 85,
+        width: 80,
+        height: 80,
         borderRadius: 15,
     },
     cardContentDetailView:
