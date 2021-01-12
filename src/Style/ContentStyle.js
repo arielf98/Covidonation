@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
     purchaseBarView:
     {
         backgroundColor: Parent.colorBlueMax,
-        height: 60,
+        height: 54,
         flexDirection: 'row',
     },
     purchaseBarPrice:
@@ -102,12 +102,12 @@ export const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         marginLeft: 20,
-        marginTop: 14,
+        marginTop: 12,
     },
     purchaseBarAction:
     {
         backgroundColor: Parent.colorWhite,
-        marginVertical: 10,
+        marginVertical: 8,
         alignSelf: 'flex-start',
         borderRadius: 5,
         position: 'absolute',
@@ -139,7 +139,7 @@ export const styles = StyleSheet.create({
     {
         height: 30,
         position: 'absolute',
-        left: -40,
+        left: -45,
     },
 
     paymentMethodText:

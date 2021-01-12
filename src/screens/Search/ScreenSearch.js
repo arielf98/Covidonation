@@ -11,15 +11,10 @@ import { ScreenContent, ScreenPaymentMethod, ScreenPurchase } from '../Content'
 import { TouchableRipple } from 'react-native-paper';
 import { store } from '../../Config/Contex/store'
 
-
-
 export const TheApp = () => {
 
-       //mengambil data dari global state 
-    // untuk lebih jelasnya baca tentang context pada react
     const globalState = useContext(store)
     const { dispatch } = globalState
-
     const navigation = useNavigation();
 
     return (
@@ -43,36 +38,40 @@ export const TheApp = () => {
                 <SectionTag />
             </View>
 
-            {/* Konten teratas */}
-            <View style={styles.sectionView}>
-                <TouchableRipple onPress={() => {
-                    navigation.navigate('ScreenKontenTeratas')
-                    
-                    //melaukan dispatch pada action IS_HIDE pada component search screen
-                    return dispatch({ type: 'IS_HIDE', payload: true })
-                    }} >
-                    <View style={styles.sectionHeader}>
-                        <Text style={styles.sectionTitle}>Konten Teratas</Text>
-                        <Icon name="chevron-right" style={styles.sectionIcon}/>
-                    </View>
-                </TouchableRipple>
-                <SectionPopular />
-            </View>
+            <View style={styles.sectionDivider}/>
 
-            {/* Terbaru */}
-            <View style={styles.sectionView}>
-            <TouchableRipple onPress={() => {
-                navigation.navigate('ScreenKontenTerbaru')
-                
-                //melaukan dispatch pada action IS_HIDE pada component search screen
-                return dispatch({ type: 'IS_HIDE', payload: true })
-                }} >
-                    <View style={styles.sectionHeader}>
-                        <Text style={styles.sectionTitle}>Konten Terbaru</Text>
-                        <Icon name="chevron-right" style={styles.sectionIcon}/>
-                    </View>
-                </TouchableRipple>
-                <SectionNewest />
+            <View style={{padding:0}}>
+                {/* Konten teratas */}
+                <View style={styles.sectionView}>
+                    <TouchableRipple onPress={() => {
+                        navigation.navigate('ScreenKontenTeratas')
+                        dispatch({ type: 'IS_HIDE', payload: true })
+                        }} >
+                        <View style={styles.sectionHeader}>
+                            <Text style={styles.sectionTitle}>Konten Teratas</Text>
+                            {/* <Icon name="chevron-right" style={styles.sectionIcon}/> */}
+                            <Text style={styles.sectionMore}>Lihat semua</Text>
+                        </View>
+                    </TouchableRipple>
+                    <SectionPopular />
+                </View>
+
+                <View style={styles.sectionDivider}/>
+
+                {/* Terbaru */}
+                <View style={styles.sectionView}>
+                <TouchableRipple onPress={() => {
+                    navigation.navigate('ScreenKontenTerbaru')
+                    dispatch({ type: 'IS_HIDE', payload: true })
+                    }} >
+                        <View style={styles.sectionHeader}>
+                            <Text style={styles.sectionTitle}>Konten Terbaru</Text>
+                            {/* <Icon name="chevron-right" style={styles.sectionIcon}/> */}
+                            <Text style={styles.sectionMore}>Lihat semua</Text>
+                        </View>
+                    </TouchableRipple>
+                    <SectionNewest />
+                </View>
             </View>
             
         </ScrollView>
@@ -88,7 +87,6 @@ function ScreenSearch() {
         <Stack.Navigator
         initialRouteName="TheApp"
         screenOptions={{headerShown: false}}
-        
         >
           <Stack.Screen name="TheApp" component={TheApp} />
           <Stack.Screen name="ScreenContent" component={ScreenContent} />
