@@ -1,34 +1,57 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, ToastAndroid } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 
 const SignUp = () => {
-    const [text, setText] = useState('');
-    const [password, setPassword] = useState('');
+    const [text, setText] = useState('')
+    const [password, setPassword] = useState('')
 
     const navigation = useNavigation()
 
  const handleSignUp = () => {
 
-     auth()
-         .createUserWithEmailAndPassword(text, password)
-         .then(() => {
-             console.log('User account created & signed in!');
-         })
-         .catch(error => {
-             if (error.code === 'auth/email-already-in-use') {
-                 console.log('That email address is already in use!');
-             }
+     
+     if( text && password != ''){
+         auth().createUserWithEmailAndPassword(text, password)
+             .then(() => {
+                 console.log('User account created & signed in!');
+             })
+             .catch(error => {
 
-             if (error.code === 'auth/invalid-email') {
-                 console.log('That email address is invalid!');
-             }
+                 switch (error.code) {
+                     case 'auth/email-already-in-use':
+                         ToastAndroid.show("Alamat Email sudah digunakan oleh akun lain",
+                             ToastAndroid.SHORT)
+                         break
+                     case 'auth/invalid-email':
+                         ToastAndroid.show("Email tidak valid",
+                             ToastAndroid.SHORT)
+                         break
+                     case 'auth/weak-password':
+                         ToastAndroid.show("Password Terlalu lemah mininal 6 karakter",
+                             ToastAndroid.SHORT)
+                         break
+                     case 'auth/too-many-requests':
+                         ToastAndroid.show("password salah terlalu sering Acces sementara kami diblokir",
+                             ToastAndroid.SHORT)
+                         break
+                     default:
+                         ToastAndroid.show("Email dan Password tidak boleh kosong",
+                             ToastAndroid.SHORT)
+                 }
+                 
+                 // TODO hapus ketika sudah masuk tahap production
+                 console.error(error);
+             });
+     } 
+     else 
+     {
+         ToastAndroid.show("Email dan Password tidak boleh kosong", ToastAndroid.SHORT)
+     }
 
-             console.error(error);
-         });
  }
 
 
@@ -71,6 +94,8 @@ const SignUp = () => {
                 </Text>
 
             </View>
+
+          
         </View>
     );
 }

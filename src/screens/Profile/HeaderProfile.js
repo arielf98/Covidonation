@@ -3,15 +3,25 @@ import { View, Text } from 'react-native'
 import { styles } from '../../Style/ProfileStyle'
 import { Avatar } from 'react-native-paper'
 import { Button } from 'react-native-paper'
+import auth from '@react-native-firebase/auth';
 
 export default function HeaderProfile() {
+
+    const user =  auth().currentUser
+
     return (
         <View style={styles.headerContent} >
 
-            <Text style={styles.profileName}
-            > Covidonation untuk kita semua </Text>
-            <Text style={styles.profileEmail}
-            > @Covidonation </Text>
+            <View style={{ 
+                width: '90%', 
+                position: 'absolute', 
+                marginLeft: 15 }}
+             >
+                <Text style={styles.profileName}
+                > {user.email.length > 20 ? `${user.email.substring(0, 20)}...`: user.email }</Text>
+                <Text style={styles.profileEmail}
+                > @{ user.email } </Text>
+            </View>
 
             <Avatar.Image   style={styles.avatarProfile}
                             size = {100}

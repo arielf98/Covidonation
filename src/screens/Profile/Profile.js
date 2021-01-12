@@ -16,12 +16,16 @@ import auth from '@react-native-firebase/auth';
 
 export function ProfileRoute() {
 
-    const  handleLogOut = () => {
-        auth()
-            .signOut()
-            .then(() => console.log('User signed out!'));
+    const handleLogOut = () => {
+        auth().signOut()
     }
 
+
+    // const getUser = () => {
+    //     const user = auth().currentUser
+
+    //     console.log(user.uid)
+    // }
 
     return (
 
@@ -47,12 +51,16 @@ export function ProfileRoute() {
                         <SettingCard
                             icon="info-circle"
                             nama="Ketentuan Layanan" />
+
                         <SettingCard
                             icon="info-circle"
                             nama="Kebijakan Privasi" />
+
                         <SettingCard
                             icon="info-circle"
-                            nama="Tentang" />
+                            nama="Tentang"
+                            // handler={() => getUser()}
+                            />
                     </View>
 
                     {/* Keluar */}

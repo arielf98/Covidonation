@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     profileName: {
         position: 'absolute',
         marginLeft: '35%',
-        marginTop: '10%',
+        marginTop: '12%',
         fontSize: 19,
         fontWeight: 'bold',
         color: 'white'
@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
     profileEmail: {
         position: 'absolute',
         marginLeft: '35%',
-        marginTop: '18%',
+        marginTop: '20%',
         fontSize: 14,
         color: 'white'
     },
