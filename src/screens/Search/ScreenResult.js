@@ -3,7 +3,7 @@ import * as Parent from '../../Style/ParentStyle'
 import { styles } from '../../Style/SearchStyle'
 
 import { View, ScrollView, Text } from 'react-native'
-import { TouchableRipple, Searchbar } from 'react-native-paper'
+import { Searchbar } from 'react-native-paper'
 import { ItemLoader, ItemCardContent } from '../../components'
 
 import { store } from '../../Config/Contex/store'

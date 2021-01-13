@@ -93,6 +93,7 @@ const ScreenKontenTerbaru = () => {
                             thumbnail={item.thumbnail || 'https://picsum.photos/500'}
                             tag={item.tag}
                             navigasi="ScreenContent"
+                            willShowNavIfBack={false}
                             />
                         );
                     }

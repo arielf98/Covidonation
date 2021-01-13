@@ -16,7 +16,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
 import { useBackHandler } from '@react-native-community/hooks'
 
-export default ScreenContent = () => {
+export default ScreenContent = ({route}) => {
 
     const globalState = useContext(store)
     const {state, dispatch} = globalState
@@ -24,23 +24,17 @@ export default ScreenContent = () => {
 
     const [isLoading, setLoading] = useState(true);
     const [dataContent, setDataContent] = useState([]);
+    const { refContentId, willShowNavIfBack } = route.params
 
     useBackHandler(()=> {
+        willShowNavIfBack ? dispatch({ type: 'IS_HIDE', payload: false }) :
+            dispatch({ type: 'IS_HIDE', payload: true })
         navigation.goBack()
-
-        if (state.isFromMiniContent){
-            state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
-                dispatch({ type: 'IS_HIDE', payload: true })
-        } else {
-            state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) :
-                dispatch({ type: 'IS_HIDE', payload: false })
-        }
-        return true
     })
 
     useEffect(() => {
         database()
-            .ref('/contents/' + state.selectedContentId)
+            .ref('/contents/' + refContentId)
             .once('value')
             .then(snapshot => {
                 setDataContent(snapshot.val())
@@ -86,16 +80,9 @@ export default ScreenContent = () => {
             >
                 <Appbar.Header style={{backgroundColor: 'rgba(0, 0, 0, 0)'}}>
                     <Appbar.BackAction onPress={() => { 
-                        navigation.pop()
-
-                        if (state.isFromMiniContent) {
-                            return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: false }) :
-                                dispatch({ type: 'IS_HIDE', payload: true })
-                        } else {
-                        return state.isBottomNavHide ? dispatch({ type: 'IS_HIDE', payload: true }) :
-                                dispatch({ type: 'IS_HIDE', payload: false })
-                        }
-
+                        willShowNavIfBack ? dispatch({ type: 'IS_HIDE', payload: false }) :
+                            dispatch({ type: 'IS_HIDE', payload: true })
+                        navigation.goBack()
                         }}
                         style={styles.topBarIcon}
                     />
@@ -157,7 +144,12 @@ export default ScreenContent = () => {
                 style={styles.purchaseBarAction}
                 labelStyle={styles.purchaseBarActionText}
                 mode="outlined"
-                onPress={() => navigation.navigate('ScreenPurchase')}
+                onPress={() => 
+                    navigation.navigate('ScreenPurchase', {
+                        total      : dataContent.price.total,
+                        forAuthor   : dataContent.price.forAuthor,
+                    })
+                }
                 color={Parent.colorBlueMax}
             >
                 Beli

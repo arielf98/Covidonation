@@ -48,6 +48,7 @@ const SectionNewest = () => {
                             authorName={item.author.name || 'Author name'}
                             thumbnail={item.thumbnail || 'https://picsum.photos/500'}
                             navigasi="ScreenContent"
+                            willShowNavIfBack={false}
                             />
                         );
                     }

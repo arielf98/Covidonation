@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/native'
 import { utils } from '@react-native-firebase/app'
 import storage from '@react-native-firebase/storage'
 
-export default ItemMiniContent = ({id, title, authorName, thumbnail, navigasi}) => {
+export default ItemMiniContent = ({id, title, authorName, thumbnail, navigasi, willShowNavIfBack}) => {
 
     const globalState = useContext(store)
     const {state, dispatch} = globalState
@@ -39,11 +39,13 @@ export default ItemMiniContent = ({id, title, authorName, thumbnail, navigasi}) 
 
     return (
         <TouchableRipple onPress={() => {
-            dispatch({ type: 'SELECTED_CONTENT_ID', payload: id || '1' })
-            navigation.navigate(navigasi)
-
+            
             dispatch({ type: 'IS_HIDE', payload: true })
-            dispatch({ type: 'IS_FROM_MINI_CONTENT', payload: true })
+            navigation.navigate(navigasi, {
+                refContentId: id || '1',
+                willShowNavIfBack: willShowNavIfBack || true,
+            })
+
         }}
         
         rippleColor = {Parent.colorRipple}

@@ -59,6 +59,7 @@ function TabHarian() {
                         thumbnail={item.thumbnail || 'https://picsum.photos/500'}
                         tag={item.tag}
                         navigasi="ScreenContent"
+                        willShowNavIfBack={false}
                         />
                     );
                 }
@@ -116,6 +117,7 @@ function TabMingguan() {
                         thumbnail={item.thumbnail || 'https://picsum.photos/500'}
                         tag={item.tag}
                         navigasi="ScreenContent"
+                        willShowNavIfBack={false}
                         />
                     );
                 }
@@ -173,6 +175,7 @@ function TabBulanan() {
                         thumbnail={item.thumbnail || 'https://picsum.photos/500'}
                         tag={item.tag}
                         navigasi="ScreenContent"
+                        willShowNavIfBack={false}
                         />
                     );
                 }

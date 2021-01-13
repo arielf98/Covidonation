@@ -7,8 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 import { store } from '../../Config/Contex/store'
 import * as Parent from '../../Style/ParentStyle'
 
-
-
 const DATA = [
     {
         id: "1",

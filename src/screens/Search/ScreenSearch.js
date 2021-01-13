@@ -5,7 +5,7 @@ import { styles } from '../../Style/SearchStyle'
 import { Text, View, ScrollView, StatusBar } from 'react-native'
 import { TouchableRipple, Searchbar } from 'react-native-paper'
 // import Icon from 'react-native-vector-icons/FontAwesome5'
-import { ScreenKontenTeratas, ScreenKontenTerbaru, SectionTag, SectionPopular, SectionNewest, SectionHasil, ScreenResult } from '../Search'
+import { ScreenKontenTeratas, ScreenKontenTerbaru, SectionTag, SectionPopular, SectionNewest, ScreenResult } from '../Search'
 import { ScreenContent, ScreenPaymentMethod, ScreenPurchase } from '../Content'
 
 import { store } from '../../Config/Contex/store'

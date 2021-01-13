@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { HomeScreen} from './src/screens/Home/Home'
+import HomeScreen from './src/screens/Home/Home'
 import { ScreenSearch } from './src/screens/Search'
 import { BottomNavigation, Text } from 'react-native-paper';
 import Notif from './src/screens/Notifikasi/Notif';

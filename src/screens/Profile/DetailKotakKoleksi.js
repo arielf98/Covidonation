@@ -11,9 +11,6 @@ import { styles } from '../../Style/ProfileStyle'
 import AttachmentCard from './AttachmentCard'
 import { ScrollView } from 'react-native-gesture-handler'
 
-
-
-
 export default function DetailKotakKoleksi({route}) {
     const DATA = [
         {
@@ -39,14 +36,13 @@ export default function DetailKotakKoleksi({route}) {
     const navigation = useNavigation()
     const globalState = useContext(store)
     const {state, dispatch } = globalState
-    const { author, title, image } = route.params
+    const { author, title, image, willShowNavIfBack } = route.params
 
 
     useBackHandler(() => {
-        state.isFromMiniContent ?   dispatch({ type: 'IS_HIDE', payload: false }) : 
-                                    dispatch({ type: 'IS_HIDE', payload: true })
+        willShowNavIfBack ? dispatch({ type: 'IS_HIDE', payload: false }) :
+            dispatch({ type: 'IS_HIDE', payload: true })
         navigation.goBack()
-        return true
     })
 
 
@@ -55,9 +51,9 @@ export default function DetailKotakKoleksi({route}) {
             <Appbar
               style={{ backgroundColor: Parent.colorBlueMax }} >
                 <Appbar.BackAction onPress={ ()=> {
+                    willShowNavIfBack ? dispatch({ type: 'IS_HIDE', payload: false }) :
+                        dispatch({ type: 'IS_HIDE', payload: true })
                     navigation.goBack()
-                    state.isFromMiniContent ?   dispatch({ type: 'IS_HIDE', payload: false }) : 
-                                                dispatch({ type: 'IS_HIDE', payload: true })
                     }} />
                 <Title style={{ color: 'white' }} > Kotak Koleksi </Title>
             </Appbar>

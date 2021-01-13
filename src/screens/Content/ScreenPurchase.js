@@ -6,7 +6,6 @@ import { View, ScrollView, Text, Image, Alert, Dimensions } from 'react-native'
 import { Appbar, DataTable, Button } from 'react-native-paper'
 import { ItemLoader } from '../../components'
 
-import database from '@react-native-firebase/database'
 import { store } from '../../Config/Contex/store'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -31,14 +30,13 @@ const DataPaymentMethod = [
     }
 ];
 
-const ScreenPurchase = () => {
+const ScreenPurchase = ({route}) => {
 
     const globalState = useContext(store)
     const {state, dispatch} = globalState
     const navigation = useNavigation()
 
-    const [isLoading, setLoading] = useState(true);
-    const [dataContent, setDataContent] = useState([]);
+    const { total, forAuthor } = route.params
 
     useBackHandler(()=> {
         navigation.goBack()
@@ -46,34 +44,6 @@ const ScreenPurchase = () => {
     })
 
     const DataPilihPembayaran = DataPaymentMethod[state.metodePembayaran-1]
-
-    useEffect(() => {
-        database()
-            .ref('/contents/' + state.selectedContentId)
-            .once('value')
-            .then(snapshot => {
-                setDataContent(snapshot.val())
-                setLoading(false)
-            }
-        );
-    }, []);
-
-    // console.log("Content Id: " + state.selectedContentId)
-    // console.log(dataContent.price)
-
-    if (isLoading)
-    {
-        return (
-            <View style={{
-                flex: 1, 
-                alignItems: 'center',
-                justifyContent: 'center', 
-                backgroundColor: Parent.colorWhite
-            }}>
-                <ItemLoader />
-            </View>
-        );
-    }
     
     return (
     <View style={{flex: 1}}>
@@ -101,15 +71,15 @@ const ScreenPurchase = () => {
                 <DataTable>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textDef}>Untuk donasi</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={styles.textDef}>{dataContent.price.total - dataContent.price.forAuthor}</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={styles.textDef}>{total - forAuthor}</Text></DataTable.Cell>
                     </DataTable.Row>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textDef}>Untuk kreator</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={styles.textDef}>{dataContent.price.forAuthor}</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={styles.textDef}>{forAuthor}</Text></DataTable.Cell>
                     </DataTable.Row>
                     <DataTable.Row>
                         <DataTable.Cell><Text style={styles.textBold}>Total</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={styles.textBold}>{dataContent.price.total}</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={styles.textBold}>{total}</Text></DataTable.Cell>
                     </DataTable.Row>
                 </DataTable>
             </View>

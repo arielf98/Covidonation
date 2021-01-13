@@ -1,35 +1,14 @@
-import React,{useContext} from 'react'
-import { View, Text, FlatList, SafeAreaView} from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { styles } from '../../Style/ProfileStyle'
-// import { ItemKoleksi } from './ItemKoleksi'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { TouchableRipple } from 'react-native-paper'
-import ItemMiniContent from '../ItemMiniContent'
-import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import { ItemLoader, ItemMiniContent } from '../../components'
+
+import database from '@react-native-firebase/database'
 import { store } from '../../Config/Contex/store'
-
-const DATA = [
-    {
-        id: "1",
-        judulKonten: "Too Much to Ask",
-        namaKreator: "Niall Horan",
-        gambarKonten: "https://picsum.photos/700",
-    },
-    {
-        id: "2",
-        judulKonten: "Again",
-        namaKreator: "YUI",
-        gambarKonten: "https://picsum.photos/700",
-    },
-    {
-        id: "3",
-        judulKonten: "Stuck with U",
-        namaKreator: "Ariana Grande & Justin Bieber",
-        gambarKonten: "https://picsum.photos/700",
-    },
-]
-
-
+import { useNavigation } from '@react-navigation/native'
 
 export default function KotakKoleksiItem() {
 
@@ -37,16 +16,19 @@ export default function KotakKoleksiItem() {
     const {dispatch} = globalState
     const navigation = useNavigation()
 
-    const renderItem = ({ item }) => (
-        
-        // <ItemKoleksi title={item.title} />
-        <ItemMiniContent
-           judulKonten = {item.judulKonten }
-           namaKreator={ item.namaKreator }
-           gambarKonten={item.gambarKonten} 
-            navigasi="DetailKotakKoleksi"
-            value={{title : item.judulKonten, image: item.gambarKonten, author: item.namaKreator}} />
-    )
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+    
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
 
     return (
      
@@ -71,16 +53,41 @@ export default function KotakKoleksiItem() {
                                 <Text style={styles.titleKotakKoleksi } > Kotak Koleksi </Text>
                             </View>
                     </TouchableRipple>
+
+                    <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    alwaysBounceHorizontal={true}
+                    >
                 
       
-                    {/* flatlist card untuk setiap card yang ada pada kotak Koleksi */}
-                    <FlatList
-                        data={DATA}
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                    />
+                    {isLoading ? <ItemLoader /> : 
+                    (
+                        dataContent.map(item => {
+
+                            if (item == null)
+                            {
+                                console.log("NULL content skipped (SectionNewest)")
+                            }
+                            else
+                            {
+                                return (
+                                    <ItemMiniContent
+                                    key={item.id || '1'}
+                                    id={item.id || '1'}
+                                    title={item.title || 'Title'}
+                                    authorName={item.author.name || 'Author name'}
+                                    thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                                    navigasi="DetailKotakKoleksi"
+                                    willShowNavIfBack={true}
+                                    />
+                                );
+                            }
+
+                        })
+                    )}
+
+                    </ScrollView>
 
         </View>
         </SafeAreaView>

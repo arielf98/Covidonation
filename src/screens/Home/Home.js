@@ -1,129 +1,106 @@
-import React from 'react'
-import { SectionList} from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React, { useContext, useState, useEffect } from 'react'
+import * as Parent from '../../Style/ParentStyle'
 import { styles } from '../../Style/HomeStyle'
-import  HeaderLists  from './HeaderLists'
-import ListItems from './ListItems'
 
-const DATA = [ 
+import { View, ScrollView } from 'react-native'
+import { ScreenResult } from '../Search/'
+import { ScreenContent, ScreenPaymentMethod, ScreenPurchase } from '../Content'
+import { ItemLoader, ItemCardContent } from '../../components'
+import HeaderLists  from './HeaderLists'
+
+import database from '@react-native-firebase/database'
+import { store } from '../../Config/Contex/store'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
+
+export const HomeApp = () => {
+
+    const globalState = useContext(store)
+    const { state, dispatch } = globalState
+    const navigation = useNavigation()
+
+    const [isLoading, setLoading] = useState(true);
+    const [dataContent, setDataContent] = useState([]);
+
+    useEffect(() => {
+        database()
+            .ref('/contents')
+            .once('value')
+            .then(snapshot => {
+                setDataContent(snapshot.val())
+                setLoading(false)
+            }
+        );
+    }, []);
+
+    if (isLoading)
     {
-        data: [
-             {  
-                id: 1,
-                title : "Mencuci adalah jalan ninjaku",
-                author: "Ariel Febrian",
-                price: 15000,
-                tag: [
-                    {
-                        id: 1,
-                        teks: "Mencuci",
-                        warna: "#65D661",
-                    },
-                    {
-                        id: 2,
-                        teks: "JalanNinja",
-                        warna: "#8455C2",
-                    },
-                    {
-                        id: 3,
-                        teks: "Anjay",
-                        warna: "#FFB97D",
-                    }
-                ],
-            },
-             {  
-                id: 2,
-                title : "cara bikin kue bolu",
-                author: "Inggi ci Imutt ",
-                price: 12000,
-                tag: [
-                    {
-                        id: 1,
-                        teks: "Memasak",
-                        warna: "#65D661",
-                    },
-                    {
-                        id: 2,
-                        teks: "Kue",
-                        warna: "#8455C2",
-                    },
-                    {
-                        id: 3,
-                        teks: "Cooking",
-                        warna: "#FFB97D",
-                    }
-                ],
-            },
-             {  
-                id: 3,
-                title : "belajar laravel pemula",
-                author: "Bagus Si tambunan",
-                price: 13000,
-                tag: [
-                    {
-                        id: 1,
-                        teks: "Pemrograman",
-                        warna: "#65D661",
-                    },
-                    {
-                        id: 2,
-                        teks: "Laravel",
-                        warna: "#8455C2",
-                    },
-                    {
-                        id: 3,
-                        teks: "Newbie",
-                        warna: "#FFB97D",
-                    }
-                ],
-            },
-             {  
-                id: 4,
-                title : "memasak adalah jalan ninjaku",
-                author: "okky Si nadiya",
-                price: 14000,
-                tag: [
-                    {
-                        id: 1,
-                        teks: "MemasakLagi",
-                        warna: "#65D661",
-                    },
-                    {
-                        id: 2,
-                        teks: "JalanNinjaLagi",
-                        warna: "#8455C2",
-                    },
-                    {
-                        id: 3,
-                        teks: "Anjaaaay",
-                        warna: "#FFB97D",
-                    }
-                ],
-            },
-        ]
+        return (
+            <View style={{
+                flex: 1, 
+                alignItems: 'center',
+                justifyContent: 'center', 
+                backgroundColor: Parent.colorWhite
+            }}>
+                <ItemLoader />
+            </View>
+        );
     }
-]
 
-export function HomeScreen() {
     return (
-        <SafeAreaView style={styles.containerSafeArea}>
-            {/* <SectionList 
-                sections={DATA}
-                keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => <ListItems  // setiap item yang ada di list ada di component ListItems
-                                            key={item.id}
-                                            title ={item.title}
-                                            author={item.author}
-                                            price={item.price}
-                                            tag={item.tag}
-                                               />}
-                                            
-                                            // component header list berisikan component carousel dan logo covidonation
-                renderSectionHeader={() => <HeaderLists/> }
-            /> */}
+        <ScrollView>
 
-        </SafeAreaView>
+            <HeaderLists/>
 
+            {dataContent.map(item => {
+
+                if (item == null)
+                {
+                    console.log("NULL content skipped (Home)")
+                }
+                else
+                {
+                    return (
+                        <ItemCardContent
+                        key={item.id || '1'}
+                        id={item.id || '1'}
+                        title={item.title || 'Title'}
+                        authorName={item.author.name || 'Author name'}
+                        priceTotal={item.price.total || 'Total price'}
+                        thumbnail={item.thumbnail || 'https://picsum.photos/500'}
+                        tag={item.tag}
+                        navigasi="ScreenContent"
+                        willShowNavIfBack={true}
+                        />
+                    );
+                }
+
+            })}
+
+        </ScrollView>
         
     )
 }
+
+const Stack = createStackNavigator();
+
+function HomeScreen() {
+
+    return (
+      <NavigationContainer>
+        <Stack.Navigator
+        initialRouteName="HomeApp"
+        screenOptions={{headerShown: false}}
+        >
+          <Stack.Screen name="HomeApp" component={HomeApp} />
+          <Stack.Screen name="ScreenResult" component={ScreenResult} />
+          <Stack.Screen name="ScreenContent" component={ScreenContent} />
+          <Stack.Screen name="ScreenPaymentMethod" component={ScreenPaymentMethod} />
+          <Stack.Screen name="ScreenPurchase" component={ScreenPurchase} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+}
+
+export default HomeScreen;
